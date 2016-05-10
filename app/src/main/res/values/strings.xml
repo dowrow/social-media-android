@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SocialMedia</string>
+    <string name="facebook_app_id">1106502439370568</string>
+    <string name="fabric_api_key">OpuGF0EVj6JL4crX7oAl35aCz</string>
+    <string name="twitter_app_id">Q0SpViJpCodWGHhLlOEs9WrUc</string>
+    <string name="twitter_api_key">N4CELsGF109WiphSBw2jgm6CqA38P9IhmMOA9CKplBWhlQ1IXn</string>
+    <string name="title_activity_global_feed">GlobalFeedActivity</string>
 </resources>

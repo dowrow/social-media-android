@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "389577220816",
+    "project_id": "socialmedia-49e08"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389577220816:android:949125f00aad12fa",
+        "android_client_info": {
+          "package_name": "com.dowrow.socialmedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389577220816-deomsigqgo4rv7ka5j480tjmqo9ha6uo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dowrow.socialmedia",
+            "certificate_hash": "A9A7FC67E398457BB67ACAF6C56B79EEA3CC23C0"
+          }
+        },
+        {
+          "client_id": "389577220816-4tn0g0jds23o8s922nidq8oo9qs4mbhv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOdn1qlbJ2fy4esB1pQoIfx4T4UqXJNRI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
