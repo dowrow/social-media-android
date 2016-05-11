@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.dowrow.socialmedia.R;
+import com.dowrow.socialmedia.controllers.DeleteAccountController;
 import com.dowrow.socialmedia.controllers.LoginController;
 
 public class GlobalFeedActivity extends AppCompatActivity {
@@ -39,13 +40,15 @@ public class GlobalFeedActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_main_logout_item:
                 LoginController.getInstance().logOut(this);
-                break;
+                return true;
+            case R.id.menu_main_delete_account_item:
+                DeleteAccountController deleteAccountController = new DeleteAccountController();
+                deleteAccountController.deleteAccount(this);
+                return true;
         }
-        return true;
-
+        return false;
     }
 }

@@ -37,18 +37,17 @@ public class LoginController {
     protected void onSocialControllerSuccess(SocialLoginController currentSocialLoginController) {
 
         final ProgressDialog progress = new ProgressDialog(loginActivity);
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
+        progress.setMessage("Loading...");
         progress.show();
         this.currentSocialLoginController = currentSocialLoginController;
         SocialMediaService service = new SocialMediaAPI().getService();
         service.getMe().enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                progress.dismiss();
                 Intent intent = new Intent(loginActivity, GlobalFeedActivity.class);
                 loginActivity.startActivity(intent);
                 loginActivity.finish();
+                progress.dismiss();
                 Toast toast = Toast.makeText(loginActivity, "Welcome " + response.body().getUsername(), Toast.LENGTH_SHORT);
                 toast.show();
             }
