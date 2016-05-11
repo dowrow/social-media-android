@@ -20,7 +20,6 @@ public class SocialMediaAPI {
     String BASE_URL = "https://social-media-server.herokuapp.com/api/v0/";
 
     public SocialMediaService getService() {
-        Log.d("Generando SocialMediaService", "cabecera=" + LoginController.getInstance().getAuthorizationHeader());
         OkHttpClient httpClient = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Interceptor.Chain chain) throws IOException {

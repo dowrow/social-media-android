@@ -5,4 +5,5 @@
     <string name="twitter_app_id">Q0SpViJpCodWGHhLlOEs9WrUc</string>
     <string name="twitter_api_key">N4CELsGF109WiphSBw2jgm6CqA38P9IhmMOA9CKplBWhlQ1IXn</string>
     <string name="title_activity_global_feed">GlobalFeedActivity</string>
+    <string name="menu_main_logout_title">Log out</string>
 </resources>

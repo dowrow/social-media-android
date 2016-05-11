@@ -14,4 +14,6 @@ public interface SocialLoginController {
 
     String getAuthorizationHeader();
 
+    void logOut();
+
 }

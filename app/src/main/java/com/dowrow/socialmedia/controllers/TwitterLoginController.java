@@ -65,4 +65,9 @@ public class TwitterLoginController implements SocialLoginController {
     public String getAuthorizationHeader() {
         return "Bearer twitter oauth_token=" + accessToken + "&oauth_token_secret=" + accessTokenSecret;
     }
+
+    @Override
+    public void logOut() {
+        Twitter.getSessionManager().clearActiveSession();
+    }
 }

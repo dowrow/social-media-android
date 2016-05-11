@@ -1,5 +1,6 @@
 package com.dowrow.socialmedia.controllers;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.dowrow.socialmedia.models.SocialMediaAPI;
 import com.dowrow.socialmedia.models.SocialMediaService;
+import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.views.GlobalFeedActivity;
 import com.dowrow.socialmedia.views.LoginActivity;
 
@@ -38,23 +40,21 @@ public class LoginController {
         progress.setTitle("Loading");
         progress.setMessage("Wait while loading...");
         progress.show();
-
         this.currentSocialLoginController = currentSocialLoginController;
-
         SocialMediaService service = new SocialMediaAPI().getService();
-
-        service.getMe().enqueue(new Callback<String>() {
+        service.getMe().enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 progress.dismiss();
                 Intent intent = new Intent(loginActivity, GlobalFeedActivity.class);
                 loginActivity.startActivity(intent);
-                Toast toast = Toast.makeText(loginActivity, "Welcome " + response.body(), Toast.LENGTH_LONG);
+                loginActivity.finish();
+                Toast toast = Toast.makeText(loginActivity, "Welcome " + response.body().getUsername(), Toast.LENGTH_SHORT);
                 toast.show();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<UserResponse> call, Throwable t) {
                 progress.dismiss();
                 Toast toast = Toast.makeText(loginActivity, "The server failed to respond.", Toast.LENGTH_LONG);
                 toast.show();
@@ -98,5 +98,12 @@ public class LoginController {
 
     public String getAuthorizationHeader() {
         return this.currentSocialLoginController.getAuthorizationHeader();
+    }
+
+    public void logOut(Activity currentActivity) {
+        this.currentSocialLoginController.logOut();
+        Intent intent = new Intent(currentActivity, LoginActivity.class);
+        currentActivity.startActivity(intent);
+        currentActivity.finish();
     }
 }
