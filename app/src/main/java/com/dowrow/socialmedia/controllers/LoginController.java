@@ -19,8 +19,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.provider.Settings.System.getString;
-
 public class LoginController {
 
     private LoginActivity loginActivity;
@@ -35,10 +33,17 @@ public class LoginController {
 
     private boolean storedSession = false;
 
-    public void storeSession() {
+    private void storeSession() {
         SharedPreferences sharedPref = loginActivity.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(loginActivity.getString(R.string.authorization_header), getAuthorizationHeader());
+        editor.commit();
+    }
+
+    private void clearStoredSession() {
+        SharedPreferences sharedPref = loginActivity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
         editor.commit();
     }
 
@@ -65,8 +70,8 @@ public class LoginController {
     }
 
     protected void onSocialControllerSuccess(SocialLoginController currentSocialLoginController) {
-
         this.currentSocialLoginController = currentSocialLoginController;
+        storeSession();
         login();
     }
 
@@ -74,6 +79,7 @@ public class LoginController {
         Log.d("Social controller error", ":(");
         Toast toast = Toast.makeText(loginActivity, "Wrong user or password. Try again.", Toast.LENGTH_LONG);
         toast.show();
+        storedSession = false;
     }
 
     public static LoginController getInstance() {
@@ -105,7 +111,10 @@ public class LoginController {
     }
 
     public void logOut(Activity currentActivity) {
-        this.currentSocialLoginController.logOut();
+        storedSession = false;
+        clearStoredSession();
+        this.facebookLoginController.logOut();
+        this.twitterLoginController.logOut();
         Intent intent = new Intent(currentActivity, LoginActivity.class);
         currentActivity.startActivity(intent);
         currentActivity.finish();
@@ -118,15 +127,19 @@ public class LoginController {
         progress.show();
         SocialMediaService service = new SocialMediaAPI().getService();
         service.getMe().enqueue(new Callback<UserResponse>() {
+
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                Intent intent = new Intent(loginActivity, GlobalFeedActivity.class);
-                loginActivity.startActivity(intent);
-                loginActivity.finish();
-                progress.dismiss();
-                Toast toast = Toast.makeText(loginActivity, "Welcome " + response.body().getUsername(), Toast.LENGTH_SHORT);
-                toast.show();
-
+                try {
+                    Intent intent = new Intent(loginActivity, GlobalFeedActivity.class);
+                    loginActivity.startActivity(intent);
+                    loginActivity.finish();
+                    progress.dismiss();
+                    Toast toast = Toast.makeText(loginActivity, "Welcome " + response.body().getUsername(), Toast.LENGTH_SHORT);
+                    toast.show();
+                } catch (Exception exception) {
+                    onFailure(call, exception);
+                }
             }
 
             @Override

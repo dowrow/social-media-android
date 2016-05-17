@@ -9,18 +9,28 @@ import com.dowrow.socialmedia.controllers.LoginController;
 
 public class LoginActivity extends AppCompatActivity {
 
+    LoginController loginController;
+
+    public LoginActivity() {
+        loginController = LoginController.getInstance();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LoginController.getInstance().initializeSdks(this);
+        loginController.initializeSdks(this);
         setContentView(R.layout.activity_login);
-        LoginController.getInstance().configureLogins(this);
+        loginController.configureLogins(this);
+        if (loginController.isSessionStored()) {
+            loginController.loadStoredSession();
+            loginController.login();
+        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        LoginController.getInstance().onActivityResult(requestCode, resultCode, data);
+        loginController.onActivityResult(requestCode, resultCode, data);
     }
 
 }
