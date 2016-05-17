@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.dowrow.socialmedia"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -43,6 +43,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'javax.annotation:jsr250-api:1.0'
     compile 'commons-lang:commons-lang:2.6'
+    compile 'com.github.jkwiecien:EasyImage:1.2.3'
+
 }
 
 crashlytics {

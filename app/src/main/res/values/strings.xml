@@ -7,4 +7,6 @@
     <string name="title_activity_global_feed">GlobalFeedActivity</string>
     <string name="menu_main_logout_title">Log out</string>
     <string name="menu_main_delete_account_title">Delete account</string>
+    <string name="publish_button">PUBLISH</string>
+    <string name="authorization_header">AUTHORIZATION_HEADER</string>
 </resources>

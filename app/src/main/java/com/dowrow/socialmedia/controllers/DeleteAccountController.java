@@ -3,11 +3,9 @@ package com.dowrow.socialmedia.controllers;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.widget.Toast;
 
-import com.dowrow.socialmedia.models.SocialMediaAPI;
-import com.dowrow.socialmedia.views.LoginActivity;
+import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

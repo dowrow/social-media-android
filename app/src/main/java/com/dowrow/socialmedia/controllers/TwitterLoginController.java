@@ -70,4 +70,5 @@ public class TwitterLoginController implements SocialLoginController {
     public void logOut() {
         Twitter.getSessionManager().clearActiveSession();
     }
+
 }

@@ -2,25 +2,24 @@ package com.dowrow.socialmedia.controllers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.dowrow.socialmedia.models.SocialMediaAPI;
-import com.dowrow.socialmedia.models.SocialMediaService;
+import com.dowrow.socialmedia.R;
+import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
+import com.dowrow.socialmedia.models.apis.SocialMediaService;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.views.GlobalFeedActivity;
 import com.dowrow.socialmedia.views.LoginActivity;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
+import static android.provider.Settings.System.getString;
 
 public class LoginController {
 
@@ -34,31 +33,41 @@ public class LoginController {
 
     private SocialLoginController currentSocialLoginController;
 
+    private boolean storedSession = false;
+
+    public void storeSession() {
+        SharedPreferences sharedPref = loginActivity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(loginActivity.getString(R.string.authorization_header), getAuthorizationHeader());
+        editor.commit();
+    }
+
+    public boolean isSessionStored() {
+        SharedPreferences sharedPref = loginActivity.getPreferences(Context.MODE_PRIVATE);
+        String authorizationHeader = sharedPref.getString(loginActivity.getString(R.string.authorization_header), "");
+        return !authorizationHeader.isEmpty();
+    }
+
+    public String getStoredAuthorizationHeader() {
+        SharedPreferences sharedPref = loginActivity.getPreferences(Context.MODE_PRIVATE);
+        return sharedPref.getString(loginActivity.getString(R.string.authorization_header), "");
+    }
+
+    public void loadStoredSession() {
+        storedSession = true;
+    }
+
+    public String getAuthorizationHeader() {
+        if (storedSession) {
+            return this.getStoredAuthorizationHeader();
+        }
+        return this.currentSocialLoginController.getAuthorizationHeader();
+    }
+
     protected void onSocialControllerSuccess(SocialLoginController currentSocialLoginController) {
 
-        final ProgressDialog progress = new ProgressDialog(loginActivity);
-        progress.setMessage("Loading...");
-        progress.show();
         this.currentSocialLoginController = currentSocialLoginController;
-        SocialMediaService service = new SocialMediaAPI().getService();
-        service.getMe().enqueue(new Callback<UserResponse>() {
-            @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                Intent intent = new Intent(loginActivity, GlobalFeedActivity.class);
-                loginActivity.startActivity(intent);
-                loginActivity.finish();
-                progress.dismiss();
-                Toast toast = Toast.makeText(loginActivity, "Welcome " + response.body().getUsername(), Toast.LENGTH_SHORT);
-                toast.show();
-            }
-
-            @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-                progress.dismiss();
-                Toast toast = Toast.makeText(loginActivity, "The server failed to respond.", Toast.LENGTH_LONG);
-                toast.show();
-            }
-        });
+        login();
     }
 
     protected void onSocialControllerError() {
@@ -95,14 +104,38 @@ public class LoginController {
         twitterLoginController.onActivityResult(requestCode, resultCode, data);
     }
 
-    public String getAuthorizationHeader() {
-        return this.currentSocialLoginController.getAuthorizationHeader();
-    }
-
     public void logOut(Activity currentActivity) {
         this.currentSocialLoginController.logOut();
         Intent intent = new Intent(currentActivity, LoginActivity.class);
         currentActivity.startActivity(intent);
         currentActivity.finish();
+    }
+
+
+    public void login() {
+        final ProgressDialog progress = new ProgressDialog(loginActivity);
+        progress.setMessage("Loading...");
+        progress.show();
+        SocialMediaService service = new SocialMediaAPI().getService();
+        service.getMe().enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                Intent intent = new Intent(loginActivity, GlobalFeedActivity.class);
+                loginActivity.startActivity(intent);
+                loginActivity.finish();
+                progress.dismiss();
+                Toast toast = Toast.makeText(loginActivity, "Welcome " + response.body().getUsername(), Toast.LENGTH_SHORT);
+                toast.show();
+
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                progress.dismiss();
+                Toast toast = Toast.makeText(loginActivity, "The server failed to respond.", Toast.LENGTH_LONG);
+                toast.show();
+                logOut(loginActivity);
+            }
+        });
     }
 }

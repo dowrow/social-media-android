@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.models.SocialMediaAPI;
 import com.dowrow.socialmedia.views.LoginActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -13,8 +12,6 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
-import java.io.IOException;
 
 public class FacebookLoginController implements SocialLoginController {
 
@@ -70,4 +67,5 @@ public class FacebookLoginController implements SocialLoginController {
     public void logOut() {
         LoginManager.getInstance().logOut();
     }
+
 }

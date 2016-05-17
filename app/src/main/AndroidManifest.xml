@@ -3,6 +3,7 @@
     package="com.dowrow.socialmedia" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -31,12 +32,12 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name=".views.GlobalFeedActivity"
             android:label="@string/title_activity_global_feed"
             android:theme="@style/AppTheme.NoActionBar" >
-
+        </activity>
+        <activity android:name=".views.PublishActivity" >
         </activity>
     </application>
 
