@@ -1,6 +1,9 @@
 package com.dowrow.socialmedia.views.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -16,8 +19,12 @@ import com.dowrow.socialmedia.views.transformations.CropSquareTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class GlobalFeedAdapter extends RecyclerView.Adapter<GlobalFeedAdapter.ViewHolder> {
 
@@ -64,8 +71,12 @@ public class GlobalFeedAdapter extends RecyclerView.Adapter<GlobalFeedAdapter.Vi
         Context context = holder.publicationView.getContext();
         // Replace contents
         Picasso.with(context).load(publicationResponse.getAuthorDetails().getProfilePicture())
+                .placeholder(new ColorDrawable(holder.publicationView.getResources()
+                        .getColor(R.color.lightGray)))
                 .transform(new CropSquareTransformation()).into(profilePictureView);
         Picasso.with(context).load(publicationResponse.getImage())
+                .placeholder(new ColorDrawable(holder.publicationView.getResources()
+                        .getColor(R.color.lightGray)))
                 .transform(new CropSquareTransformation()).into(imageView);
         usernameView.setText(publicationResponse.getAuthorDetails().getUsername());
         timeAgoView.setText(getTimeAgo(publicationResponse.getTimestamp()));
@@ -75,9 +86,12 @@ public class GlobalFeedAdapter extends RecyclerView.Adapter<GlobalFeedAdapter.Vi
     private String getTimeAgo(String timestamp) {
         Log.d("timestamp", timestamp);
         SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+
         try {
-            Date datetime = inFormat.parse(timestamp);
-            return DateUtils.getRelativeTimeSpanString(datetime.getTime()).toString();
+            inFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Long datetime = inFormat.parse(timestamp).getTime();
+            Long now = new Date().getTime();
+            return DateUtils.getRelativeTimeSpanString(datetime, now, DateUtils.FORMAT_ABBREV_ALL).toString();
         } catch (Exception e) {
             Log.d("timestamp excp", e.getMessage());
             return "Long time ago";

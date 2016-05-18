@@ -1,7 +1,8 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.sociallogin;
 
 import android.content.Intent;
 
+import com.dowrow.socialmedia.controllers.LoginController;
 import com.dowrow.socialmedia.views.LoginActivity;
 
 public interface SocialLoginController {

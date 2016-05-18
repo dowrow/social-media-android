@@ -9,6 +9,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.dowrow.socialmedia.R;
+import com.dowrow.socialmedia.controllers.sociallogin.FacebookLoginController;
+import com.dowrow.socialmedia.controllers.sociallogin.SocialLoginController;
+import com.dowrow.socialmedia.controllers.sociallogin.TwitterLoginController;
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.apis.SocialMediaService;
 import com.dowrow.socialmedia.models.entities.UserResponse;
@@ -25,9 +28,9 @@ public class LoginController {
 
     private static LoginController instance = null;
 
-    private  FacebookLoginController facebookLoginController;
+    private FacebookLoginController facebookLoginController;
 
-    private  TwitterLoginController twitterLoginController;
+    private TwitterLoginController twitterLoginController;
 
     private SocialLoginController currentSocialLoginController;
 
@@ -69,13 +72,13 @@ public class LoginController {
         return this.currentSocialLoginController.getAuthorizationHeader();
     }
 
-    protected void onSocialControllerSuccess(SocialLoginController currentSocialLoginController) {
+    public void onSocialControllerSuccess(SocialLoginController currentSocialLoginController) {
         this.currentSocialLoginController = currentSocialLoginController;
         storeSession();
         login();
     }
 
-    protected void onSocialControllerError() {
+    public void onSocialControllerError() {
         Log.d("Social controller error", ":(");
         Toast toast = Toast.makeText(loginActivity, "Wrong user or password. Try again.", Toast.LENGTH_LONG);
         toast.show();

@@ -1,9 +1,10 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.sociallogin;
 
 import android.content.Intent;
 import android.util.Log;
 
 import com.dowrow.socialmedia.R;
+import com.dowrow.socialmedia.controllers.LoginController;
 import com.dowrow.socialmedia.views.LoginActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
