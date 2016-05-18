@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,15 +18,26 @@ import android.view.View;
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.DeleteAccountController;
 import com.dowrow.socialmedia.controllers.LoginController;
+import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
+import com.dowrow.socialmedia.models.entities.PaginatedResponse;
+import com.dowrow.socialmedia.models.entities.PublicationResponse;
+import com.dowrow.socialmedia.views.adapters.GlobalFeedAdapter;
 
 import java.io.File;
+import java.util.List;
 
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GlobalFeedActivity extends AppCompatActivity {
 
     private static final String IMAGE_FILE = "IMAGE_FILE";
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +46,37 @@ public class GlobalFeedActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        setPublishCallback();
+        SocialMediaAPI api = new SocialMediaAPI();
+        api.getService().getGlobalPublications().enqueue(new Callback<PaginatedResponse<PublicationResponse>>() {
+            @Override
+            public void onResponse(Call<PaginatedResponse<PublicationResponse>> call, Response<PaginatedResponse<PublicationResponse>> response) {
+                Log.d("GlobalPubls response", response.body().getResults().toString());
+                configureRecyclerView(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<PaginatedResponse<PublicationResponse>> call, Throwable t) {
+                Log.d("GlobalPubs error", t.getMessage());
+            }
+        });
+    }
+
+    private void configureRecyclerView(List<PublicationResponse> publications) {
+        mRecyclerView = (RecyclerView) findViewById(R.id.publication_feed);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new GlobalFeedAdapter(publications);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void setPublishCallback() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         final Activity thisActivity = this;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 1. Instantiate an AlertDialog.Builder with its constructor
                 new AlertDialog.Builder(view.getContext())
                         .setTitle("Upload picture")
                         .setItems(R.array.menu_publish_picture, new DialogInterface.OnClickListener() {
@@ -54,7 +93,6 @@ public class GlobalFeedActivity extends AppCompatActivity {
                         })
                         .setCancelable(true)
                         .show();
-
             }
         });
     }
@@ -86,16 +124,13 @@ public class GlobalFeedActivity extends AppCompatActivity {
         EasyImage.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
             @Override
             public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
-                //Some error handling
+                // TODO
             }
 
             @Override
             public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
-                //Handle the image
                 onPhotoReturned(imageFile);
             }
-
-
         });
     }
 
@@ -103,6 +138,5 @@ public class GlobalFeedActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), PublishActivity.class);
         intent.putExtra(IMAGE_FILE, imageFile);
         startActivity(intent);
-
     }
 }

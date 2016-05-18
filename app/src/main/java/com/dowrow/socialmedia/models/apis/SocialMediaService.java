@@ -1,6 +1,10 @@
 package com.dowrow.socialmedia.models.apis;
 
+import com.dowrow.socialmedia.models.entities.PaginatedResponse;
+import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -22,5 +26,8 @@ public interface SocialMediaService {
 
     @Multipart
     @POST("publications/?format=json")
-    Call<ResponseBody> createPublication(@Part("text") RequestBody text, @Part MultipartBody.Part file);
+    Call<PublicationResponse> createPublication(@Part("text") RequestBody text, @Part MultipartBody.Part file);
+
+    @GET("publications/?format=json")
+    Call<PaginatedResponse<PublicationResponse>> getGlobalPublications();
 }

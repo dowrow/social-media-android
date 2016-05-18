@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.apis.SocialMediaService;
+import com.dowrow.socialmedia.models.entities.PublicationResponse;
 
 import java.io.File;
 
@@ -26,11 +27,11 @@ public class PublishController {
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("image", imageFile.getName(), requestFile);
         RequestBody requestText = RequestBody.create(MediaType.parse("multipart/form-data"), text);
-        Call<ResponseBody> call = service.createPublication(requestText, body);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<PublicationResponse> call = service.createPublication(requestText, body);
+        call.enqueue(new Callback<PublicationResponse>() {
             @Override
-            public void onResponse(Call<ResponseBody> call,
-                                   Response<ResponseBody> response) {
+            public void onResponse(Call<PublicationResponse> call,
+                                   Response<PublicationResponse> response) {
                 if (response.code() == 201) {
                     Toast toast = Toast.makeText(publishActivity, "Published!", Toast.LENGTH_SHORT);
                     toast.show();
@@ -41,7 +42,7 @@ public class PublishController {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<PublicationResponse> call, Throwable t) {
                 Toast toast = Toast.makeText(publishActivity, "Error publishing your picture", Toast.LENGTH_SHORT);
                 toast.show();
             }
