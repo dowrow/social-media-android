@@ -24,47 +24,22 @@ public class PublicationResponse {
     @Expose
     private String text;
 
-    /**
-     *
-     * @return
-     * The id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     *
-     * @return
-     * The authorDetails
-     */
     public UserResponse getAuthorDetails() {
         return authorDetails;
     }
 
-    /**
-     *
-     * @return
-     * The timestamp
-     */
     public String getTimestamp() {
         return timestamp;
     }
 
-    /**
-     *
-     * @return
-     * The image
-     */
     public String getImage() {
         return image;
     }
 
-    /**
-     *
-     * @return
-     * The text
-     */
     public String getText() {
         return text;
     }

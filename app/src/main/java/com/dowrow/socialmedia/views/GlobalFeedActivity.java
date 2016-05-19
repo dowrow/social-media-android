@@ -48,10 +48,12 @@ public class GlobalFeedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setPublishCallback();
         SocialMediaAPI api = new SocialMediaAPI();
-        api.getService().getGlobalPublications().enqueue(new Callback<PaginatedResponse<PublicationResponse>>() {
+        api.getService().getGlobalPublications("").enqueue(new Callback<PaginatedResponse<PublicationResponse>>() {
             @Override
             public void onResponse(Call<PaginatedResponse<PublicationResponse>> call, Response<PaginatedResponse<PublicationResponse>> response) {
                 Log.d("GlobalPubls response", response.body().getResults().toString());
+                Log.d("Next cursor", ">" + response.body().getCursorNext());
+                Log.d("Previous cursor", ">" + response.body().getCursorPrevious());
                 configureRecyclerView(response.body().getResults());
             }
 

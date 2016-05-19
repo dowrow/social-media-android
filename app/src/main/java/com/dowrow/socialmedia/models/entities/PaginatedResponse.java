@@ -3,6 +3,7 @@ package com.dowrow.socialmedia.models.entities;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,6 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class PaginatedResponse<U> {
 
-    @SerializedName("count")
-    @Expose
-    private Integer count;
     @SerializedName("next")
     @Expose
     private String next;
@@ -24,32 +22,20 @@ public class PaginatedResponse<U> {
     @Expose
     private List<U> results = new ArrayList<U>();
 
-    /**
-     * @return The count
-     */
-    public Integer getCount() {
-        return count;
+    public String getCursorNext() {
+        if (next == null) {
+            return "";
+        }
+        return next.split("cursor=")[1];
     }
 
-    /**
-     * @return The next
-     */
-    public String getNext() {
-        return next;
+    public String getCursorPrevious() {
+        if (previous == null) {
+            return "";
+        }
+        return previous.split("cursor=")[1];
     }
 
-
-    /**
-     * @return The previous
-     */
-    public String getPrevious() {
-        return previous;
-    }
-
-
-    /**
-     * @return The results
-     */
     public List<U> getResults() {
         return results;
     }
