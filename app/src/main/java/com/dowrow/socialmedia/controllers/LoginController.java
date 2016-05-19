@@ -126,10 +126,10 @@ public class LoginController {
 
     public void login() {
         final ProgressDialog progress = new ProgressDialog(loginActivity);
-        progress.setMessage("Loading...");
+        progress.setMessage("Logging in...");
         progress.show();
         SocialMediaService service = new SocialMediaAPI().getService();
-        service.getMe().enqueue(new Callback<UserResponse>() {
+        service.getSelf().enqueue(new Callback<UserResponse>() {
 
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {

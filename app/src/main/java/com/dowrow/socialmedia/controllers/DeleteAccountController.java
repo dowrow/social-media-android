@@ -21,7 +21,7 @@ public class DeleteAccountController {
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
                         SocialMediaAPI api = new SocialMediaAPI();
-                        api.getService().deleteMe().enqueue(new Callback<ResponseBody>() {
+                        api.getService().deleteSelf().enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     Toast toast = Toast.makeText(activity, "Your account has been deleted forever.", Toast.LENGTH_LONG);

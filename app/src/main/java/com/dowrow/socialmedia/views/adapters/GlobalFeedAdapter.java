@@ -1,12 +1,9 @@
 package com.dowrow.socialmedia.views.adapters;
 
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +16,8 @@ import com.dowrow.socialmedia.views.transformations.CropSquareTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class GlobalFeedAdapter extends RecyclerView.Adapter<GlobalFeedAdapter.ViewHolder> {
@@ -64,11 +58,13 @@ public class GlobalFeedAdapter extends RecyclerView.Adapter<GlobalFeedAdapter.Vi
         Picasso.with(context).load(publicationResponse.getAuthorDetails().getProfilePicture())
                 .placeholder(new ColorDrawable(holder.publicationView.getResources()
                         .getColor(R.color.lightGray)))
-                .transform(new CropSquareTransformation()).into(profilePictureView);
+                .transform(new CropSquareTransformation())
+                .into(profilePictureView);
         Picasso.with(context).load(publicationResponse.getImage())
                 .placeholder(new ColorDrawable(holder.publicationView.getResources()
                         .getColor(R.color.lightGray)))
-                .transform(new CropSquareTransformation()).into(imageView);
+                .transform(new CropSquareTransformation())
+                .into(imageView);
         usernameView.setText(publicationResponse.getAuthorDetails().getUsername());
         timeAgoView.setText(getTimeAgo(publicationResponse.getTimestamp()));
         textView.setText(publicationResponse.getText());

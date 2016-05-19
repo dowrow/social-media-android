@@ -19,11 +19,11 @@ import retrofit2.http.Part;
 
 public interface SocialMediaService {
 
-    @GET("me/")
-    Call<UserResponse> getMe();
+    @GET("users/self/")
+    Call<UserResponse> getSelf();
 
-    @DELETE("me/")
-    Call<ResponseBody> deleteMe();
+    @DELETE("users/self/")
+    Call<ResponseBody> deleteSelf();
 
     @Multipart
     @POST("publications/")
