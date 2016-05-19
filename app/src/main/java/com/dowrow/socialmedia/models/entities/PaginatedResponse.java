@@ -1,9 +1,9 @@
 package com.dowrow.socialmedia.models.entities;
 
+import com.dowrow.socialmedia.models.entities.exceptions.NoMorePagesException;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,16 +22,16 @@ public class PaginatedResponse<U> {
     @Expose
     private List<U> results = new ArrayList<U>();
 
-    public String getCursorNext() {
+    public String getCursorNext() throws NoMorePagesException {
         if (next == null) {
-            return "";
+            throw new NoMorePagesException();
         }
         return next.split("cursor=")[1];
     }
 
-    public String getCursorPrevious() {
+    public String getCursorPrevious() throws NoMorePagesException {
         if (previous == null) {
-            return "";
+            throw new NoMorePagesException();
         }
         return previous.split("cursor=")[1];
     }

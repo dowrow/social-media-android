@@ -7,10 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,27 +15,19 @@ import android.widget.Toast;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.DeleteAccountController;
+import com.dowrow.socialmedia.controllers.GlobalFeedController;
 import com.dowrow.socialmedia.controllers.LoginController;
-import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
-import com.dowrow.socialmedia.models.entities.PaginatedResponse;
-import com.dowrow.socialmedia.models.entities.PublicationResponse;
-import com.dowrow.socialmedia.views.adapters.PublicationResponseAdapter;
 
 import java.io.File;
-import java.util.List;
 
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class GlobalFeedActivity extends AppCompatActivity {
 
     private static final String IMAGE_FILE = "IMAGE_FILE";
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+
+    private GlobalFeedController globalFeedController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,32 +37,8 @@ public class GlobalFeedActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setPublishCallback();
-        SocialMediaAPI api = new SocialMediaAPI();
-        api.getService().getGlobalPublications("")
-                .enqueue(new Callback<PaginatedResponse<PublicationResponse>>() {
-                    @Override
-                    public void onResponse(Call<PaginatedResponse<PublicationResponse>> call,
-                                           Response<PaginatedResponse<PublicationResponse>> response) {
-                        Log.d("GlobalPubls response", response.body().getResults().toString());
-                        Log.d("Next cursor", ">" + response.body().getCursorNext());
-                        Log.d("Previous cursor", ">" + response.body().getCursorPrevious());
-                        configureRecyclerView(response.body().getResults());
-                    }
-
-                    @Override
-                    public void onFailure(Call<PaginatedResponse<PublicationResponse>> call, Throwable t) {
-                        Log.d("GlobalPubs error", t.getMessage());
-                    }
-                });
-    }
-
-    private void configureRecyclerView(List<PublicationResponse> publications) {
-        mRecyclerView = (RecyclerView) findViewById(R.id.publication_feed);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new PublicationResponseAdapter(publications);
-        mRecyclerView.setAdapter(mAdapter);
+        globalFeedController = new GlobalFeedController(this);
+        globalFeedController.loadMore();
     }
 
     private void setPublishCallback() {
@@ -146,4 +111,5 @@ public class GlobalFeedActivity extends AppCompatActivity {
         intent.putExtra(IMAGE_FILE, imageFile);
         startActivity(intent);
     }
+
 }

@@ -3,6 +3,7 @@ package com.dowrow.socialmedia.models.entities;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")

@@ -5,13 +5,11 @@
         android:id="@+id/menu_main_delete_account_item"
         android:icon="@android:drawable/ic_menu_delete"
         app:showAsAction="never"
-        android:title="@string/menu_main_delete_account_title">
-    </item>
+        android:title="@string/menu_main_delete_account_title"></item>
     <item
         android:id="@+id/menu_main_logout_item"
         android:icon="@android:drawable/ic_menu_revert"
         app:showAsAction="never"
-        android:title="@string/menu_main_logout_title">
-    </item>
+        android:title="@string/menu_main_logout_title"></item>
 
 </menu>

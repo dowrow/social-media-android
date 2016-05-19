@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array
-        name="menu_publish_picture">
+    <array name="menu_publish_picture">
         <item>From camera</item>
         <item>From gallery</item>
     </array>

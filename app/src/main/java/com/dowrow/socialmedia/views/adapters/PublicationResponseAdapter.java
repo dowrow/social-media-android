@@ -17,6 +17,7 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -33,8 +34,8 @@ public class PublicationResponseAdapter extends RecyclerView.Adapter<Publication
         }
     }
 
-    public PublicationResponseAdapter(List<PublicationResponse> myDataset) {
-        publications = myDataset;
+    public PublicationResponseAdapter() {
+        publications = new ArrayList<>();
     }
 
     @Override
@@ -92,4 +93,17 @@ public class PublicationResponseAdapter extends RecyclerView.Adapter<Publication
         return publications.size();
     }
 
+    public void addAll(List<PublicationResponse> publications) {
+        int positionStart = this.publications.size();
+        int itemCount = publications.size();
+        this.publications.addAll(publications);
+        //notifyDataSetChanged();
+        notifyItemRangeInserted(positionStart, itemCount);
+
+    }
+
+    public void clear() {
+        this.publications.clear();
+        notifyDataSetChanged();
+    }
 }
