@@ -82,7 +82,11 @@ public class PublicationResponseAdapter extends RecyclerView.Adapter<Publication
             inFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             Long datetime = inFormat.parse(timestamp).getTime();
             Long now = new Date().getTime();
-            return DateUtils.getRelativeTimeSpanString(datetime, now, DateUtils.FORMAT_ABBREV_ALL).toString();
+            if (datetime > now) {
+                return "Just now";
+            }
+            String relativeTimeSpan = DateUtils.getRelativeTimeSpanString(datetime, now, DateUtils.SECOND_IN_MILLIS).toString();
+            return relativeTimeSpan.substring(0, 1).toUpperCase() + relativeTimeSpan.substring(1);
         } catch (Exception e) {
             return "Long time ago";
         }
@@ -97,7 +101,6 @@ public class PublicationResponseAdapter extends RecyclerView.Adapter<Publication
         int positionStart = this.publications.size();
         int itemCount = publications.size();
         this.publications.addAll(publications);
-        //notifyDataSetChanged();
         notifyItemRangeInserted(positionStart, itemCount);
 
     }
