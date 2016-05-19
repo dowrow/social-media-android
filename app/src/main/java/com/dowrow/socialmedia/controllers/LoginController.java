@@ -18,6 +18,9 @@ import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.views.GlobalFeedActivity;
 import com.dowrow.socialmedia.views.LoginActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,9 +31,7 @@ public class LoginController {
 
     private static LoginController instance = null;
 
-    private FacebookLoginController facebookLoginController;
-
-    private TwitterLoginController twitterLoginController;
+    private List<SocialLoginController> socialLoginControllers;
 
     private SocialLoginController currentSocialLoginController;
 
@@ -93,31 +94,32 @@ public class LoginController {
     }
 
     private LoginController() {
-        facebookLoginController = new FacebookLoginController();
-        twitterLoginController = new TwitterLoginController();
+        socialLoginControllers = new ArrayList<>();
+        socialLoginControllers.add(new FacebookLoginController());
+        socialLoginControllers.add(new TwitterLoginController());
     }
 
     public void initializeSdks(LoginActivity activity) {
-        facebookLoginController.initializeSdk(activity);
-        twitterLoginController.initializeSdk(activity);
+        for(SocialLoginController socialLoginController : socialLoginControllers)
+            socialLoginController.initializeSdk(activity);
     }
 
     public void configureLogins(LoginActivity activity) {
         loginActivity = activity;
-        facebookLoginController.configureLogin(activity, this);
-        twitterLoginController.configureLogin(activity, this);
+        for(SocialLoginController socialLoginController : socialLoginControllers)
+            socialLoginController.configureLogin(activity, this);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        facebookLoginController.onActivityResult(requestCode, resultCode, data);
-        twitterLoginController.onActivityResult(requestCode, resultCode, data);
+        for(SocialLoginController socialLoginController : socialLoginControllers)
+            socialLoginController.onActivityResult(requestCode, resultCode, data);
     }
 
     public void logOut(Activity currentActivity) {
-        storedSession = false;
         clearStoredSession();
-        this.facebookLoginController.logOut();
-        this.twitterLoginController.logOut();
+        storedSession = false;
+        for(SocialLoginController socialLoginController : socialLoginControllers)
+            socialLoginController.logOut();
         Intent intent = new Intent(currentActivity, LoginActivity.class);
         currentActivity.startActivity(intent);
         currentActivity.finish();
@@ -130,7 +132,6 @@ public class LoginController {
         progress.show();
         SocialMediaService service = new SocialMediaAPI().getService();
         service.getSelf().enqueue(new Callback<UserResponse>() {
-
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 try {

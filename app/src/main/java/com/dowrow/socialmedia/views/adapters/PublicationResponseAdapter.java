@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.views.transformations.CropSquareTransformation;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -20,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class GlobalFeedAdapter extends RecyclerView.Adapter<GlobalFeedAdapter.ViewHolder> {
+public class PublicationResponseAdapter extends RecyclerView.Adapter<PublicationResponseAdapter.ViewHolder> {
 
     private List<PublicationResponse> publications;
 
@@ -32,12 +33,12 @@ public class GlobalFeedAdapter extends RecyclerView.Adapter<GlobalFeedAdapter.Vi
         }
     }
 
-    public GlobalFeedAdapter(List<PublicationResponse> myDataset) {
+    public PublicationResponseAdapter(List<PublicationResponse> myDataset) {
         publications = myDataset;
     }
 
     @Override
-    public GlobalFeedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PublicationResponseAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.publication_feed_item, parent, false);
         ViewHolder vh = new ViewHolder(v);
@@ -55,12 +56,16 @@ public class GlobalFeedAdapter extends RecyclerView.Adapter<GlobalFeedAdapter.Vi
         TextView timeAgoView = (TextView) holder.publicationView.findViewById(R.id.publication_time_ago);
         TextView textView = (TextView) holder.publicationView.findViewById(R.id.publication_text);
         Context context = holder.publicationView.getContext();
-        Picasso.with(context).load(publicationResponse.getAuthorDetails().getProfilePicture())
+        Picasso.with(context)
+                .load(publicationResponse.getAuthorDetails().getProfilePicture())
+                .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
                 .placeholder(new ColorDrawable(holder.publicationView.getResources()
                         .getColor(R.color.lightGray)))
                 .transform(new CropSquareTransformation())
                 .into(profilePictureView);
-        Picasso.with(context).load(publicationResponse.getImage())
+        Picasso.with(context)
+                .load(publicationResponse.getImage())
+                .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
                 .placeholder(new ColorDrawable(holder.publicationView.getResources()
                         .getColor(R.color.lightGray)))
                 .transform(new CropSquareTransformation())
