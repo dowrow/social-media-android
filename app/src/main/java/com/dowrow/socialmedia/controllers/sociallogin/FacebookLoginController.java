@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.LoginController;
-import com.dowrow.socialmedia.views.LoginActivity;
+import com.dowrow.socialmedia.views.activities.LoginActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;

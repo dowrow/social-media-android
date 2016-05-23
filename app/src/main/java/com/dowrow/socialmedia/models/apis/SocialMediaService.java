@@ -29,4 +29,8 @@ public interface SocialMediaService {
 
     @GET("publications/")
     Call<PaginatedResponse<PublicationResponse>> getGlobalPublications(@Query("cursor") String cursor);
+
+    @GET("users/self/publications/")
+    Call<PaginatedResponse<PublicationResponse>> getSelfPublications(@Query("cursor") String cursor);
+
 }

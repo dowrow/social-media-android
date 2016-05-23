@@ -1,6 +1,6 @@
 package com.dowrow.socialmedia.models.entities;
 
-import com.dowrow.socialmedia.models.entities.exceptions.NoMorePagesException;
+import com.dowrow.socialmedia.models.exceptions.NoMorePagesException;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

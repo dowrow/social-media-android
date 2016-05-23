@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
-import com.dowrow.socialmedia.views.transformations.CropSquareTransformation;
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -59,17 +57,16 @@ public class PublicationResponseAdapter extends RecyclerView.Adapter<Publication
         Context context = holder.publicationView.getContext();
         Picasso.with(context)
                 .load(publicationResponse.getAuthorDetails().getProfilePicture())
-                .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
                 .placeholder(new ColorDrawable(holder.publicationView.getResources()
                         .getColor(R.color.lightGray)))
-                .transform(new CropSquareTransformation())
+                .fit()
                 .into(profilePictureView);
         Picasso.with(context)
                 .load(publicationResponse.getImage())
-                .memoryPolicy(MemoryPolicy.NO_STORE, MemoryPolicy.NO_CACHE)
                 .placeholder(new ColorDrawable(holder.publicationView.getResources()
                         .getColor(R.color.lightGray)))
-                .transform(new CropSquareTransformation())
+                .fit()
+                .centerCrop()
                 .into(imageView);
         usernameView.setText(publicationResponse.getAuthorDetails().getUsername());
         timeAgoView.setText(getTimeAgo(publicationResponse.getTimestamp()));
@@ -102,7 +99,6 @@ public class PublicationResponseAdapter extends RecyclerView.Adapter<Publication
         int itemCount = publications.size();
         this.publications.addAll(publications);
         notifyItemRangeInserted(positionStart, itemCount);
-
     }
 
     public void clear() {

@@ -12,15 +12,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GlobalFeedController extends AbstractFeedController {
+public class SelfProfileController extends AbstractFeedController {
 
-    public GlobalFeedController(Fragment fragment) {
+    public SelfProfileController(Fragment fragment) {
         super(fragment);
     }
 
     @Override
     public Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor) {
-       return api.getService().getGlobalPublications(nextCursor);
+        return api.getService().getSelfPublications(nextCursor);
     }
 
 }

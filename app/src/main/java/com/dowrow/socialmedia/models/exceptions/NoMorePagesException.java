@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.models.entities.exceptions;
+package com.dowrow.socialmedia.models.exceptions;
 
 public class NoMorePagesException extends Exception {
 

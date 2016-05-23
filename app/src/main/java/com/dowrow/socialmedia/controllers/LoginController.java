@@ -15,8 +15,8 @@ import com.dowrow.socialmedia.controllers.sociallogin.TwitterLoginController;
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.apis.SocialMediaService;
 import com.dowrow.socialmedia.models.entities.UserResponse;
-import com.dowrow.socialmedia.views.GlobalFeedActivity;
-import com.dowrow.socialmedia.views.LoginActivity;
+import com.dowrow.socialmedia.views.activities.LoginActivity;
+import com.dowrow.socialmedia.views.activities.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,8 @@ public class LoginController {
     private SocialLoginController currentSocialLoginController;
 
     private boolean storedSession = false;
+
+    private UserResponse self;
 
     private void storeSession() {
         SharedPreferences sharedPref = loginActivity.getPreferences(Context.MODE_PRIVATE);
@@ -70,7 +72,12 @@ public class LoginController {
         if (storedSession) {
             return this.getStoredAuthorizationHeader();
         }
-        return this.currentSocialLoginController.getAuthorizationHeader();
+        try {
+            return this.currentSocialLoginController.getAuthorizationHeader();
+        } catch (Exception e) {
+            logOut(loginActivity);
+            return "";
+        }
     }
 
     public void onSocialControllerSuccess(SocialLoginController currentSocialLoginController) {
@@ -125,7 +132,6 @@ public class LoginController {
         currentActivity.finish();
     }
 
-
     public void login() {
         final ProgressDialog progress = new ProgressDialog(loginActivity);
         progress.setMessage("Logging in...");
@@ -135,7 +141,8 @@ public class LoginController {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 try {
-                    Intent intent = new Intent(loginActivity, GlobalFeedActivity.class);
+                    self = response.body();
+                    Intent intent = new Intent(loginActivity, MainActivity.class);
                     loginActivity.startActivity(intent);
                     loginActivity.finish();
                     progress.dismiss();
@@ -154,5 +161,9 @@ public class LoginController {
                 logOut(loginActivity);
             }
         });
+    }
+
+    public UserResponse getSelf() {
+        return self;
     }
 }

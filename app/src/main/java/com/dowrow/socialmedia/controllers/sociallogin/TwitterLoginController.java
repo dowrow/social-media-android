@@ -7,7 +7,7 @@ import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.LoginController;
-import com.dowrow.socialmedia.views.LoginActivity;
+import com.dowrow.socialmedia.views.activities.LoginActivity;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;

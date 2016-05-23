@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.views;
+package com.dowrow.socialmedia.views.custom;
 
 import android.content.Context;
 import android.util.AttributeSet;

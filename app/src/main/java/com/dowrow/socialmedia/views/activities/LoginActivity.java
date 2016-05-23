@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.views;
+package com.dowrow.socialmedia.views.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

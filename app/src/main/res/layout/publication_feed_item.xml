@@ -43,7 +43,7 @@
 
     </LinearLayout>
 
-    <com.dowrow.socialmedia.views.SquareImageView
+    <com.dowrow.socialmedia.views.custom.SquareImageView
         android:id="@+id/publication_image"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -51,7 +51,7 @@
         android:layout_marginRight="0dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
-        android:layout_gravity="center" />
+        />
 
     <TextView
         android:id="@+id/publication_text"

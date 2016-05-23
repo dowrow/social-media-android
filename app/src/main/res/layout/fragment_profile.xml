@@ -1,0 +1,70 @@
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.dowrow.socialmedia.views.fragments.SelfProfileFragment"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/white"
+        >
+
+        <ImageView
+            android:id="@+id/self_profile_picture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            />
+
+        <TextView
+            android:id="@+id/self_profile_username"
+            android:text="Username"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:text="60 pubs · 50 followers · 23k following"
+            android:textSize="16dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            />
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+            <Button
+                android:id="@+id/delete_account_button"
+                android:text="Delete account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                style="@style/LinearButton"
+                />
+
+            <Button
+                android:id="@+id/logout_button"
+                android:text="Log out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/LinearButton"
+                />
+
+        </LinearLayout>
+        <include layout="@layout/publication_feed"/>
+    </LinearLayout>
+
+

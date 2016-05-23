@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.views;
+package com.dowrow.socialmedia.views.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,6 @@ import android.widget.ImageView;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.PublishController;
-import com.dowrow.socialmedia.views.transformations.CropSquareTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -20,12 +19,10 @@ public class PublishActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Add title");
         setContentView(R.layout.activity_publish);
         imageFile = (File) getIntent().getExtras().get("IMAGE_FILE");
         ImageView imageView =  (ImageView) findViewById(R.id.publish_imageView);
-        Picasso.with(getApplication()).load(imageFile).transform(new CropSquareTransformation())
-                .into(imageView);
+        Picasso.with(getApplication()).load(imageFile).fit().centerCrop().into(imageView);
     }
 
     public void publish(View v) {
