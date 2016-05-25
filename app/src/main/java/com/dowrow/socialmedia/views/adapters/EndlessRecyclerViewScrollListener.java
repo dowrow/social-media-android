@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.views.adapters;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

@@ -12,6 +12,7 @@ import com.dowrow.socialmedia.models.entities.PaginatedResponse;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.exceptions.NoMorePagesException;
 import com.dowrow.socialmedia.views.adapters.ComplexFeedAdapter;
+import com.dowrow.socialmedia.views.adapters.EndlessRecyclerViewScrollListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,13 +73,10 @@ public abstract class AbstractFeedController {
             public void onResponse(Call<PaginatedResponse<PublicationResponse>> call,
                                    Response<PaginatedResponse<PublicationResponse>> response) {
                 if (nextCursor == null) {
-                    Toast toast = Toast.makeText(mFragment.getView().getContext(),
-                            "There's no more publications", Toast.LENGTH_SHORT);
-                    toast.show();
                     return;
                 }
-                adapter.addAll(response.body().getResults());
                 try {
+                    adapter.addAll(response.body().getResults());
                     nextCursor = response.body().getCursorNext();
                 } catch (NoMorePagesException e) {
                     nextCursor = null;

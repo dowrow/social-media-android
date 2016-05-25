@@ -6,10 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dowrow.socialmedia.R;
+import com.dowrow.socialmedia.controllers.LoginController;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.views.viewholders.PublicationViewHolder;
 import com.dowrow.socialmedia.views.viewholders.SelfProfileHeaderViewHolder;
+import com.dowrow.socialmedia.views.viewholders.SelfPublicationViewHolder;
+import com.twitter.sdk.android.core.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,9 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private final int PUBLICATION = 0;
 
-    private final int USER = 1;
+    private final int SELF_PUBLICATION = 1;
+
+    private final int USER = 2;
 
     private UserResponse userResponse = null;
 
@@ -37,9 +42,15 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        if (items.get(position) instanceof PublicationResponse) {
+        Object item = items.get(position);
+        if (item instanceof PublicationResponse) {
+            PublicationResponse publicationResponse = (PublicationResponse)item;
+            UserResponse self = LoginController.getInstance().getSelf();
+            if (publicationResponse.getAuthorDetails().getId() == self.getId()) {
+                return SELF_PUBLICATION;
+            }
             return PUBLICATION;
-        } else if (items.get(position) instanceof UserResponse) {
+        } else if (item instanceof UserResponse) {
             return USER;
         }
         return -1;
@@ -50,8 +61,11 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         switch (viewType) {
 
-            case PUBLICATION:
+            case SELF_PUBLICATION:
+                View selfPublicationView = (View) inflater.inflate(R.layout.self_publication_viewholder, viewGroup, false);
+                return new SelfPublicationViewHolder(selfPublicationView);
 
+            case PUBLICATION:
                 View publicationView = (View) inflater.inflate(R.layout.publication_viewholder, viewGroup, false);
                 return new PublicationViewHolder(publicationView);
 
@@ -68,10 +82,16 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         switch (viewHolder.getItemViewType()) {
+
+            case SELF_PUBLICATION:
+                SelfPublicationViewHolder selfPublicationViewHolder = (SelfPublicationViewHolder) viewHolder;
+                selfPublicationViewHolder.bind((PublicationResponse) items.get(position));
+
             case PUBLICATION:
                 PublicationViewHolder publicationViewHolder = (PublicationViewHolder) viewHolder;
                 publicationViewHolder.bind((PublicationResponse)items.get(position));
                 break;
+
             case USER:
                 if (usingUserSelfHeader){
                     SelfProfileHeaderViewHolder selfProfileHeaderViewHolder = (SelfProfileHeaderViewHolder) viewHolder;

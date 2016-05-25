@@ -13,6 +13,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface SocialMediaService {
@@ -29,6 +30,9 @@ public interface SocialMediaService {
 
     @GET("publications/")
     Call<PaginatedResponse<PublicationResponse>> getGlobalPublications(@Query("cursor") String cursor);
+
+    @DELETE("publications/{id}/")
+    Call<ResponseBody> deletePublication(@Path("id") String publicationId);
 
     @GET("users/self/publications/")
     Call<PaginatedResponse<PublicationResponse>> getSelfPublications(@Query("cursor") String cursor);

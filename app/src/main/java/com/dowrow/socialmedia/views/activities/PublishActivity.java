@@ -1,6 +1,8 @@
 package com.dowrow.socialmedia.views.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -26,9 +28,20 @@ public class PublishActivity extends AppCompatActivity {
     }
 
     public void publish(View v) {
+        String text = ((EditText) findViewById(R.id.publishEditText)).getText().toString();
+        if (text == null || text.isEmpty()) {
+            new AlertDialog.Builder(this)
+                    .setMessage("You must add a title.")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {}
+                    })
+                    .show();
+            return;
+        }
         finish();
         PublishController publishController = new PublishController();
-        String text = ((EditText) findViewById(R.id.publishEditText)).getText().toString();
         publishController.publish(this, imageFile, text);
     }
+
 }

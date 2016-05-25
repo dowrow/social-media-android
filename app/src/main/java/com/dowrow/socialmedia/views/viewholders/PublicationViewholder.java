@@ -32,6 +32,8 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
 
     private TextView text;
 
+    protected PublicationResponse publicationResponse;
+
     public PublicationViewHolder(View v) {
         super(v);
         view = v;
@@ -43,6 +45,7 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(PublicationResponse publicationResponse) {
+        this.publicationResponse = publicationResponse;
         Context context = view.getContext();
         Transformation circleTransformation = new RoundedTransformationBuilder()
                 .cornerRadiusDp(50)
