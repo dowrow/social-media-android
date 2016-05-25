@@ -14,7 +14,7 @@ import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.views.fragments.GlobalFeedFragment;
 import com.dowrow.socialmedia.views.fragments.SelfProfileFragment;
 
-public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
+public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private String tabTitles[] = new String[] { "Global Feed", "Profile" };
 
@@ -25,7 +25,7 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
             R.drawable.ic_self_profile,
     };
 
-    public MainFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public MainActivityFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }
@@ -48,14 +48,11 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-
-
-            Drawable image = ContextCompat.getDrawable(context, imageResId[position]);
-            image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
-            SpannableString sb = new SpannableString(" ");
-            ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
-            sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return sb;
-
+        Drawable image = ContextCompat.getDrawable(context, imageResId[position]);
+        image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
+        SpannableString sb = new SpannableString(" ");
+        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
+        sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return sb;
     }
 }

@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.views.adapters.MainFragmentPagerAdapter;
+import com.dowrow.socialmedia.views.adapters.MainActivityFragmentPagerAdapter;
 
 import java.io.File;
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MainFragmentPagerAdapter(getSupportFragmentManager(), this));
+        viewPager.setAdapter(new MainActivityFragmentPagerAdapter(getSupportFragmentManager(), this));
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
         setPublishCallback();

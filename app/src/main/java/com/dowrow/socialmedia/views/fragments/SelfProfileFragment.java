@@ -32,38 +32,13 @@ public class SelfProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.publication_feed, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setCallbacks(view);
-        loadProfile();
         selfProfileController = new SelfProfileController(this);
         selfProfileController.loadMore();
-    }
-
-
-    public void setCallbacks(View view) {
-        view.findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginController.getInstance().logOut(getActivity());
-            }
-        });
-        view.findViewById(R.id.delete_account_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteAccountController.deleteAccount(getActivity());
-            }
-        });
-    }
-
-    private void loadProfile() {
-        UserResponse self = LoginController.getInstance().getSelf();
-        ImageView selfProfilePicture = (ImageView) getView().findViewById(R.id.self_profile_picture);
-        Picasso.with(getContext()).load(self.getProfilePicture()).fit().into(selfProfilePicture);
-        ((TextView)getView().findViewById(R.id.self_profile_username)).setText(self.getUsername());
     }
 
 

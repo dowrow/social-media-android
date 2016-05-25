@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.dowrow.socialmedia.R;
@@ -12,7 +11,7 @@ import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.entities.PaginatedResponse;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.exceptions.NoMorePagesException;
-import com.dowrow.socialmedia.views.adapters.PublicationResponseAdapter;
+import com.dowrow.socialmedia.views.adapters.ComplexFeedAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +25,7 @@ public abstract class AbstractFeedController {
 
     protected Fragment mFragment;
 
-    protected PublicationResponseAdapter adapter;
+    protected ComplexFeedAdapter adapter;
 
     private RecyclerView recyclerView;
 
@@ -43,7 +42,7 @@ public abstract class AbstractFeedController {
         swipeRefreshLayout = (SwipeRefreshLayout) fragment.getView().findViewById(R.id.publication_feed_swipe);
         layoutManager = new LinearLayoutManager(fragment.getView().getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new PublicationResponseAdapter();
+        adapter = new ComplexFeedAdapter();
         endlessRecyclerViewScrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
@@ -69,13 +68,12 @@ public abstract class AbstractFeedController {
 
     public void loadMore() {
         getLoadMoreRequest(nextCursor).enqueue(new Callback<PaginatedResponse<PublicationResponse>>() {
-
             @Override
             public void onResponse(Call<PaginatedResponse<PublicationResponse>> call,
                                    Response<PaginatedResponse<PublicationResponse>> response) {
                 if (nextCursor == null) {
                     Toast toast = Toast.makeText(mFragment.getView().getContext(),
-                            "There's no more publications", Toast.LENGTH_LONG);
+                            "There's no more publications", Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
@@ -90,7 +88,6 @@ public abstract class AbstractFeedController {
 
             @Override
             public void onFailure(Call<PaginatedResponse<PublicationResponse>> call, Throwable t) {
-                Log.d("GlobalPubs error", t.getMessage());
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
