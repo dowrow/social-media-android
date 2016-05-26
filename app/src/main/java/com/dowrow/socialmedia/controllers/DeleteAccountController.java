@@ -43,6 +43,7 @@ public class DeleteAccountController {
                 }
             }
         };
+
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage("Are you sure?")
                 .setPositiveButton("Delete account forever", dialogClickListener)

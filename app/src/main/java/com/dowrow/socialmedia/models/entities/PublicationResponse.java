@@ -50,4 +50,11 @@ public class PublicationResponse {
         return "Text: " + text + " Image: " + image;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof PublicationResponse)) {
+            return false;
+        }
+        return this.id == ((PublicationResponse) obj).getId();
+    }
 }

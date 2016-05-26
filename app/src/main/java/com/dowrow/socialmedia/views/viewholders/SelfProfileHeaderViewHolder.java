@@ -46,9 +46,7 @@ public class SelfProfileHeaderViewHolder extends RecyclerView.ViewHolder {
                 .build();
         Picasso.with(context).load(user.getProfilePicture()).transform(circleTransformation).into(profilePicture);
         username.setText(user.getUsername());
-        // TODO: Get from API
-        stats.setText("12 publications");
-
+        stats.setText(user.getPublicationsCount() + " publications");
         view.findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +59,5 @@ public class SelfProfileHeaderViewHolder extends RecyclerView.ViewHolder {
                 deleteAccountController.deleteAccount((Activity) context);
             }
         });
-
     }
 }

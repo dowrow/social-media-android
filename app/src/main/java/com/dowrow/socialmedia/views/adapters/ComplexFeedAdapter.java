@@ -1,6 +1,7 @@
 package com.dowrow.socialmedia.views.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,6 +113,16 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         int itemCount = publications.size();
         this.items.addAll(publications);
         notifyItemRangeInserted(positionStart, itemCount);
+    }
+
+    public void remove(Object item) {
+        Log.d("remove", "item = " + item);
+        Log.d("remove", "items = " + items);
+        Log.d("remove", "count = " + items.size());
+        int position = items.indexOf(item);
+        Log.d("remove", "position = " + position);
+        items.remove(position);
+        notifyItemRemoved(position);
     }
 
     public void clear() {

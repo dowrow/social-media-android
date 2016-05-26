@@ -1,6 +1,7 @@
 package com.dowrow.socialmedia.views.viewholders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
+import com.dowrow.socialmedia.views.activities.UserProfileActivity;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -57,6 +59,13 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
                 .fit()
                 .transform(circleTransformation)
                 .into(profilePicture);
+        profilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), UserProfileActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
         Picasso.with(context)
                 .load(publicationResponse.getImage())
                 .placeholder(new ColorDrawable(view.getResources().getColor(R.color.lightGray)))
@@ -64,6 +73,13 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
                 .centerCrop()
                 .into(image);
         username.setText(publicationResponse.getAuthorDetails().getUsername());
+        username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), UserProfileActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
         timeAgo.setText(getTimeAgo(publicationResponse.getTimestamp()));
         text.setText(publicationResponse.getText());
     }

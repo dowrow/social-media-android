@@ -20,7 +20,7 @@ public class SelfPublicationViewHolder extends PublicationViewHolder {
         v.findViewById(R.id.publication_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletePublicationController.deletePublication(publicationResponse.getId().toString(), v);
+                deletePublicationController.deletePublication(publicationResponse, v);
             }
         });
     }

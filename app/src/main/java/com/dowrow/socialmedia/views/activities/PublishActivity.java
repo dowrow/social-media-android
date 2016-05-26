@@ -21,6 +21,8 @@ public class PublishActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Publication preview");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_publish);
         imageFile = (File) getIntent().getExtras().get("IMAGE_FILE");
         ImageView imageView =  (ImageView) findViewById(R.id.publish_imageView);

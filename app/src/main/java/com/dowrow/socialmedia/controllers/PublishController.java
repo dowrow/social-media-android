@@ -35,6 +35,13 @@ public class PublishController {
             public void onResponse(Call<PublicationResponse> call,
                                    Response<PublicationResponse> response) {
                 if (response.code() == 201) {
+                    try {
+                        GlobalFeedController.getInstance().refresh();
+                        SelfProfileController.getInstance().refresh();
+                    } catch (Exception e) {
+
+                    }
+
                     Toast toast = Toast.makeText(publishActivity, "Published!", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {

@@ -21,41 +21,27 @@ public class UserResponse {
     @SerializedName("profile_picture")
     @Expose
     private String profilePicture;
+    @SerializedName("publications_count")
+    @Expose
+    private int publicationsCount;
 
-    /**
-     *
-     * @return
-     * The id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     *
-     * @return
-     * The email
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     *
-     * @return
-     * The username
-     */
     public String getUsername() {
         return username;
     }
 
-    /**
-     *
-     * @return
-     * The profilePicture
-     */
     public String getProfilePicture() {
         return profilePicture;
     }
 
+    public int getPublicationsCount() {
+        return publicationsCount;
+    }
 }

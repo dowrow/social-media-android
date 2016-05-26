@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.dowrow.socialmedia.R;
@@ -72,11 +73,22 @@ public abstract class AbstractFeedController {
             @Override
             public void onResponse(Call<PaginatedResponse<PublicationResponse>> call,
                                    Response<PaginatedResponse<PublicationResponse>> response) {
+
+                if (!response.isSuccessful()){
+                    Log.d("loadMore", "response not successful");
+                }
+
                 if (nextCursor == null) {
                     return;
                 }
-                try {
+
+                if (response != null && response.body() != null) {
                     adapter.addAll(response.body().getResults());
+                } else {
+                    Log.d("loadMore()", "null response");
+                }
+
+                try {
                     nextCursor = response.body().getCursorNext();
                 } catch (NoMorePagesException e) {
                     nextCursor = null;
@@ -89,6 +101,10 @@ public abstract class AbstractFeedController {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    public void remove(Object item) {
+        adapter.remove(item);
     }
 
     public abstract Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor);
