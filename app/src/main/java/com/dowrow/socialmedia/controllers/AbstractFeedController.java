@@ -11,6 +11,7 @@ import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.entities.PaginatedResponse;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
+import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.models.exceptions.NoMorePagesException;
 import com.dowrow.socialmedia.views.adapters.ComplexFeedAdapter;
 import com.dowrow.socialmedia.views.adapters.EndlessRecyclerViewScrollListener;
@@ -69,12 +70,32 @@ public abstract class AbstractFeedController {
     }
 
     public void loadMore() {
+        Call<UserResponse> userHeaderRequest = getUserHeaderRequest();
+        if (userHeaderRequest != null && adapter.isEmpty()) {
+            userHeaderRequest.enqueue(new Callback<UserResponse>() {
+                    @Override
+                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                        adapter.add(response.body());
+                        loadPublications();
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserResponse> call, Throwable t) {
+                        loadPublications();
+                    }
+                });
+        } else {
+            loadPublications();
+        }
+    }
+
+    public void loadPublications() {
         getLoadMoreRequest(nextCursor).enqueue(new Callback<PaginatedResponse<PublicationResponse>>() {
             @Override
             public void onResponse(Call<PaginatedResponse<PublicationResponse>> call,
                                    Response<PaginatedResponse<PublicationResponse>> response) {
 
-                if (!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Log.d("loadMore", "response not successful");
                 }
 
@@ -84,15 +105,15 @@ public abstract class AbstractFeedController {
 
                 if (response != null && response.body() != null) {
                     adapter.addAll(response.body().getResults());
+                    try {
+                        nextCursor = response.body().getCursorNext();
+                    } catch (NoMorePagesException e) {
+                        nextCursor = null;
+                    }
                 } else {
                     Log.d("loadMore()", "null response");
                 }
 
-                try {
-                    nextCursor = response.body().getCursorNext();
-                } catch (NoMorePagesException e) {
-                    nextCursor = null;
-                }
                 swipeRefreshLayout.setRefreshing(false);
             }
 
@@ -106,6 +127,8 @@ public abstract class AbstractFeedController {
     public void remove(Object item) {
         adapter.remove(item);
     }
+
+    public abstract Call<UserResponse> getUserHeaderRequest();
 
     public abstract Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor);
 

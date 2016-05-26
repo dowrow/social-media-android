@@ -26,11 +26,7 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private final int SELF_PUBLICATION = 1;
 
-    private final int USER = 2;
-
-    private UserResponse userResponse = null;
-
-    private boolean usingUserSelfHeader = false;
+    private final int SELF_USER = 2;
 
     public ComplexFeedAdapter() {
         this.items = new ArrayList<>();
@@ -52,7 +48,7 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             }
             return PUBLICATION;
         } else if (item instanceof UserResponse) {
-            return USER;
+            return SELF_USER;
         }
         return -1;
     }
@@ -70,12 +66,10 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 View publicationView = (View) inflater.inflate(R.layout.publication_viewholder, viewGroup, false);
                 return new PublicationViewHolder(publicationView);
 
-            case USER:
-                if (usingUserSelfHeader) {
-                    View selfProfileView = (View) inflater.inflate(R.layout.self_profile_viewholder, viewGroup, false);
-                    return new SelfProfileHeaderViewHolder(selfProfileView);
-                }
-                return null;
+            case SELF_USER:
+                View selfProfileView = (View) inflater.inflate(R.layout.self_profile_viewholder, viewGroup, false);
+                return new SelfProfileHeaderViewHolder(selfProfileView);
+
         }
         return null;
     }
@@ -87,25 +81,18 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case SELF_PUBLICATION:
                 SelfPublicationViewHolder selfPublicationViewHolder = (SelfPublicationViewHolder) viewHolder;
                 selfPublicationViewHolder.bind((PublicationResponse) items.get(position));
+                break;
 
             case PUBLICATION:
                 PublicationViewHolder publicationViewHolder = (PublicationViewHolder) viewHolder;
                 publicationViewHolder.bind((PublicationResponse)items.get(position));
                 break;
 
-            case USER:
-                if (usingUserSelfHeader){
-                    SelfProfileHeaderViewHolder selfProfileHeaderViewHolder = (SelfProfileHeaderViewHolder) viewHolder;
-                    selfProfileHeaderViewHolder.bind(userResponse);
-                }
+            case SELF_USER:
+                SelfProfileHeaderViewHolder selfProfileHeaderViewHolder = (SelfProfileHeaderViewHolder) viewHolder;
+                selfProfileHeaderViewHolder.bind((UserResponse)items.get(position));
                 break;
         }
-    }
-
-    public void setSelfProfileHeader(UserResponse self) {
-        usingUserSelfHeader = true;
-        this.userResponse = self;
-        items.add(0, self);
     }
 
     public void addAll(List<PublicationResponse> publications) {
@@ -113,6 +100,11 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         int itemCount = publications.size();
         this.items.addAll(publications);
         notifyItemRangeInserted(positionStart, itemCount);
+    }
+
+    public void add(Object item) {
+        this.items.add(item);
+        notifyItemInserted(this.items.size() - 1);
     }
 
     public void remove(Object item) {
@@ -127,9 +119,10 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void clear() {
         this.items.clear();
-        if (usingUserSelfHeader) {
-            items.add(userResponse);
-        }
         notifyDataSetChanged();
+    }
+
+    public boolean isEmpty() {
+        return items.isEmpty();
     }
 }

@@ -19,6 +19,7 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
 
     public void reset() {
         previousTotalItemCount = 0;
+        loading = true;
     }
 
     public int getLastVisibleItem(int[] lastVisibleItemPositions) {

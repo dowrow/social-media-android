@@ -25,22 +25,11 @@ public class SelfProfileController extends AbstractFeedController {
 
     private SelfProfileController(Fragment fragment) {
         super(fragment);
-        loadSelfProfile();
     }
 
-    private void loadSelfProfile() {
-        api.getService().getSelf().enqueue(new Callback<UserResponse>() {
-            @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if (response != null) {
-                    adapter.setSelfProfileHeader(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-            }
-        });
+    @Override
+    public Call<UserResponse> getUserHeaderRequest() {
+        return api.getService().getSelf();
     }
 
     @Override
