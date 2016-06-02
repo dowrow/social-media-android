@@ -13,7 +13,7 @@ import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.views.viewholders.PublicationViewHolder;
 import com.dowrow.socialmedia.views.viewholders.SelfProfileHeaderViewHolder;
 import com.dowrow.socialmedia.views.viewholders.SelfPublicationViewHolder;
-import com.twitter.sdk.android.core.models.User;
+import com.dowrow.socialmedia.views.viewholders.UserProfileHeaderViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,8 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private final int SELF_PUBLICATION = 1;
 
     private final int SELF_USER = 2;
+
+    private final int USER = 3;
 
     public ComplexFeedAdapter() {
         this.items = new ArrayList<>();
@@ -48,7 +50,13 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             }
             return PUBLICATION;
         } else if (item instanceof UserResponse) {
-            return SELF_USER;
+            UserResponse user = (UserResponse) item;
+            if (user.getId().equals(LoginController.getInstance().getSelf().getId())) {
+                return SELF_USER;
+            } else {
+                return USER;
+            }
+
         }
         return -1;
     }
@@ -70,7 +78,12 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 View selfProfileView = (View) inflater.inflate(R.layout.self_profile_viewholder, viewGroup, false);
                 return new SelfProfileHeaderViewHolder(selfProfileView);
 
+            case USER:
+                View userProfileView = (View) inflater.inflate(R.layout.user_profile_viewholder, viewGroup, false);
+                return new UserProfileHeaderViewHolder(userProfileView);
+
         }
+        Log.d("onCreateViewHolder", "undefined item type");
         return null;
     }
 
@@ -91,6 +104,11 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case SELF_USER:
                 SelfProfileHeaderViewHolder selfProfileHeaderViewHolder = (SelfProfileHeaderViewHolder) viewHolder;
                 selfProfileHeaderViewHolder.bind((UserResponse)items.get(position));
+                break;
+
+            case USER:
+                UserProfileHeaderViewHolder userProfileHeaderViewHolder = (UserProfileHeaderViewHolder) viewHolder;
+                userProfileHeaderViewHolder.bind((UserResponse)items.get(position));
                 break;
         }
     }

@@ -2,7 +2,6 @@ package com.dowrow.socialmedia.controllers;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;

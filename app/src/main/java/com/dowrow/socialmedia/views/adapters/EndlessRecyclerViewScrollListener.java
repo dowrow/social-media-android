@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 
 public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
 
-    private int visibleThreshold = 3;
+    private int visibleThreshold = 5;
 
     private int previousTotalItemCount = 0;
 

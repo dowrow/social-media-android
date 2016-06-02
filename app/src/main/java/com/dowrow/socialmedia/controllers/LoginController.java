@@ -135,6 +135,8 @@ public class LoginController {
     public void login() {
         final ProgressDialog progress = new ProgressDialog(loginActivity);
         progress.setMessage("Logging in...");
+        progress.setCanceledOnTouchOutside(false);
+        progress.setCancelable(false);
         progress.show();
         SocialMediaService service = new SocialMediaAPI().getService();
         service.getSelf().enqueue(new Callback<UserResponse>() {

@@ -11,17 +11,21 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 
 import com.dowrow.socialmedia.R;
+import com.dowrow.socialmedia.views.fragments.HomeFeedFragment;
+import com.dowrow.socialmedia.views.fragments.UserSearchFragment;
 import com.dowrow.socialmedia.views.fragments.GlobalFeedFragment;
 import com.dowrow.socialmedia.views.fragments.SelfProfileFragment;
 
 public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private String tabTitles[] = new String[] { "Global Feed", "Profile" };
+    private String tabTitles[] = new String[] { "Home", "Global Feed", "Search user", "Profile" };
 
     private Context context;
 
     private int[] imageResId = {
+            R.drawable.ic_home,
             R.drawable.ic_global_feed,
+            R.drawable.ic_search,
             R.drawable.ic_self_profile,
     };
 
@@ -39,8 +43,12 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return GlobalFeedFragment.newInstance();
+                return HomeFeedFragment.newInstance();
             case 1:
+                return GlobalFeedFragment.newInstance();
+            case 2:
+                return UserSearchFragment.newInstance();
+            case 3:
                 return SelfProfileFragment.newInstance();
         }
         return null;

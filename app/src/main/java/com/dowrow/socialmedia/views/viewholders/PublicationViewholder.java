@@ -16,6 +16,7 @@ import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -59,13 +60,7 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
                 .fit()
                 .transform(circleTransformation)
                 .into(profilePicture);
-        profilePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), UserProfileActivity.class);
-                view.getContext().startActivity(intent);
-            }
-        });
+
         Picasso.with(context)
                 .load(publicationResponse.getImage())
                 .placeholder(new ColorDrawable(view.getResources().getColor(R.color.lightGray)))
@@ -76,14 +71,24 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
         username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), UserProfileActivity.class);
-                view.getContext().startActivity(intent);
+                viewUserProfile();
+            }
+        });
+        profilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewUserProfile();
             }
         });
         timeAgo.setText(getTimeAgo(publicationResponse.getTimestamp()));
         text.setText(publicationResponse.getText());
     }
 
+    protected void viewUserProfile() {
+        Intent intent = new Intent(view.getContext(), UserProfileActivity.class);
+        intent.putExtra(UserProfileActivity.USER, (Serializable) publicationResponse.getAuthorDetails());
+        view.getContext().startActivity(intent);
+    }
 
     private String getTimeAgo(String timestamp) {
         SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");

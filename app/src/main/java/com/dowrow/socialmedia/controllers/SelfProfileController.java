@@ -7,8 +7,6 @@ import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SelfProfileController extends AbstractFeedController {
 

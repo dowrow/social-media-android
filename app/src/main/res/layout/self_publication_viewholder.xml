@@ -30,7 +30,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="Username"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/publication_time_ago"

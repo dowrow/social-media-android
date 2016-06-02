@@ -1,7 +1,6 @@
 package com.dowrow.socialmedia.views.viewholders;
 
 import android.view.View;
-import android.widget.Toast;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.DeletePublicationController;
@@ -24,6 +23,5 @@ public class SelfPublicationViewHolder extends PublicationViewHolder {
             }
         });
     }
-
 
 }

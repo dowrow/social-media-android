@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import com.dowrow.socialmedia.models.entities.PaginatedResponse;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
-import com.dowrow.socialmedia.views.fragments.GlobalFeedFragment;
 
 import retrofit2.Call;
 

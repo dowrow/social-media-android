@@ -1,6 +1,5 @@
 package com.dowrow.socialmedia.views.fragments;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,17 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.GlobalFeedController;
+import com.dowrow.socialmedia.controllers.UserProfileController;
 
-public class GlobalFeedFragment extends Fragment {
+public class UserProfileFragment extends Fragment {
 
-    private GlobalFeedController globalFeedController;
+    UserProfileController userProfileController;
 
-    public GlobalFeedFragment() {
-    }
-
-    public static GlobalFeedFragment newInstance() {
-        return new GlobalFeedFragment();
+    public UserProfileFragment() {
     }
 
     @Override
@@ -28,9 +23,9 @@ public class GlobalFeedFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle bundle){
+    public void onViewCreated(View view, Bundle bundle) {
         super.onViewCreated(view, bundle);
-        globalFeedController = GlobalFeedController.getInstance(this);
-        globalFeedController.loadMore();
+        userProfileController = UserProfileController.getInstance(this);
     }
+
 }

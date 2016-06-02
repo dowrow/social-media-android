@@ -1,6 +1,5 @@
 package com.dowrow.socialmedia.views.viewholders;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,14 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.DeleteAccountController;
-import com.dowrow.socialmedia.controllers.LoginController;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
-public class SelfProfileHeaderViewHolder extends RecyclerView.ViewHolder {
+public class UserProfileHeaderViewHolder extends RecyclerView.ViewHolder {
 
     private View view;
 
@@ -25,15 +22,12 @@ public class SelfProfileHeaderViewHolder extends RecyclerView.ViewHolder {
 
     private TextView stats;
 
-    private DeleteAccountController deleteAccountController;
-
-    public SelfProfileHeaderViewHolder(View v) {
+    public UserProfileHeaderViewHolder(View v) {
         super(v);
         view = v;
         profilePicture = (ImageView) v.findViewById(R.id.self_profile_picture);
         username = (TextView) v.findViewById(R.id.self_profile_username);
         stats = (TextView) v.findViewById(R.id.self_profile_stats);
-        deleteAccountController = new DeleteAccountController();
     }
 
     public void bind(UserResponse user) {
@@ -45,17 +39,12 @@ public class SelfProfileHeaderViewHolder extends RecyclerView.ViewHolder {
         Picasso.with(context).load(user.getProfilePicture()).transform(circleTransformation).into(profilePicture);
         username.setText(user.getUsername());
         stats.setText(user.getPublicationsCount() + " publications");
-        view.findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.follow_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginController.getInstance().logOut((Activity) context);
+                // TODO: Follow user
             }
         });
-        view.findViewById(R.id.delete_account_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteAccountController.deleteAccount((Activity) context);
-            }
-        });
+
     }
 }

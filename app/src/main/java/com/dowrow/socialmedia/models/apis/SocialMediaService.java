@@ -21,6 +21,9 @@ public interface SocialMediaService {
     @GET("users/self/")
     Call<UserResponse> getSelf();
 
+    @GET("users/{id}/")
+    Call<UserResponse> getUser(@Path("id")String id);
+
     @DELETE("users/self/")
     Call<ResponseBody> deleteSelf();
 
@@ -37,4 +40,9 @@ public interface SocialMediaService {
     @GET("users/self/publications/")
     Call<PaginatedResponse<PublicationResponse>> getSelfPublications(@Query("cursor") String cursor);
 
+    @GET("users/{id}/publications/")
+    Call<PaginatedResponse<PublicationResponse>> getUserPublications(@Path("id") String id, @Query("cursor") String cursor);
+
+    @GET("users")
+    Call<PaginatedResponse<UserResponse>> searchUsers(@Query("search")String query, @Query("cursor")String nextCursor);
 }
