@@ -11,10 +11,10 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.views.fragments.HomeFeedFragment;
-import com.dowrow.socialmedia.views.fragments.UserSearchFragment;
 import com.dowrow.socialmedia.views.fragments.GlobalFeedFragment;
+import com.dowrow.socialmedia.views.fragments.HomeFeedFragment;
 import com.dowrow.socialmedia.views.fragments.SelfProfileFragment;
+import com.dowrow.socialmedia.views.fragments.UserSearchFragment;
 
 public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
 

@@ -1,21 +1,19 @@
 package com.dowrow.socialmedia.views.fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.SearchView;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.UserSearchController;
+import com.twitter.sdk.android.core.models.Search;
 
 public class UserSearchFragment extends Fragment {
 
@@ -43,24 +41,35 @@ public class UserSearchFragment extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller = UserSearchController.getInstance(this);
-        Button searchButton = (Button)view.findViewById(R.id.search_button);
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        SearchView searchButton = (SearchView)view.findViewById(R.id.search_text);
+        searchButton.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                controller.setQuery(((EditText) view.findViewById(R.id.search_text)).getText().toString());
-                controller.refresh();
+            public boolean onQueryTextSubmit(String query) {
+                search(view);
                 try {
-                    InputMethodManager inputMethodManager = (InputMethodManager)view.getContext()
+                    InputMethodManager inputMethodManager = (InputMethodManager) view.getContext()
                             .getSystemService(Activity.INPUT_METHOD_SERVICE);
                     if (inputMethodManager != null) {
                         inputMethodManager
-                                .hideSoftInputFromWindow(((Activity)view.getContext())
+                                .hideSoftInputFromWindow(((Activity) view.getContext())
                                         .getCurrentFocus().getWindowToken(), 0);
                     }
                 } catch (Exception e) {
                 }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                search(view);
+                return true;
             }
         });
+    }
+
+    private void search(View view){
+        controller.setQuery(((SearchView) view.findViewById(R.id.search_text)).getQuery().toString());
+        controller.refresh();
     }
 
     @Override

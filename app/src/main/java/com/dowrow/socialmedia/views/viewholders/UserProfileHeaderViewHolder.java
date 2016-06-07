@@ -2,10 +2,13 @@ package com.dowrow.socialmedia.views.viewholders;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dowrow.socialmedia.controllers.FollowController;
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
@@ -22,15 +25,18 @@ public class UserProfileHeaderViewHolder extends RecyclerView.ViewHolder {
 
     private TextView stats;
 
+    private FollowController followController;
+
     public UserProfileHeaderViewHolder(View v) {
         super(v);
         view = v;
         profilePicture = (ImageView) v.findViewById(R.id.self_profile_picture);
         username = (TextView) v.findViewById(R.id.self_profile_username);
         stats = (TextView) v.findViewById(R.id.self_profile_stats);
+        followController = new FollowController(view.getContext());
     }
 
-    public void bind(UserResponse user) {
+    public void bind(final UserResponse user) {
         final Context context = view.getContext();
         Transformation circleTransformation = new RoundedTransformationBuilder()
                 .cornerRadiusDp(50)
@@ -39,12 +45,15 @@ public class UserProfileHeaderViewHolder extends RecyclerView.ViewHolder {
         Picasso.with(context).load(user.getProfilePicture()).transform(circleTransformation).into(profilePicture);
         username.setText(user.getUsername());
         stats.setText(user.getPublicationsCount() + " publications");
-        view.findViewById(R.id.follow_button).setOnClickListener(new View.OnClickListener() {
+        final Button followButton = (Button)view.findViewById(R.id.follow_button);
+        followController.styleFollowButton(user, followButton);
+        followButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Follow user
+                followController.toggleFollow(user);
+                followController.styleFollowButton(user, followButton);
             }
         });
-
     }
+
 }

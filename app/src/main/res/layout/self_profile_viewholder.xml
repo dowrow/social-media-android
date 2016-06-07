@@ -53,7 +53,7 @@
             android:id="@+id/delete_account_button"
             android:text="Delete account"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             style="@style/LinearButton"
             />
@@ -62,8 +62,9 @@
             android:id="@+id/logout_button"
             android:text="Log out"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/LinearButton"
+            android:layout_height="36dp"
+
+            style="@style/SolidButton"
             />
 
     </LinearLayout>

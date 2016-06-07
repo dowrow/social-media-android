@@ -1,5 +1,6 @@
 package com.dowrow.socialmedia.models.apis;
 
+import com.dowrow.socialmedia.models.entities.FollowResponse;
 import com.dowrow.socialmedia.models.entities.PaginatedResponse;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
@@ -9,6 +10,8 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -43,6 +46,14 @@ public interface SocialMediaService {
     @GET("users/{id}/publications/")
     Call<PaginatedResponse<PublicationResponse>> getUserPublications(@Path("id") String id, @Query("cursor") String cursor);
 
-    @GET("users")
+    @GET("users/")
     Call<PaginatedResponse<UserResponse>> searchUsers(@Query("search")String query, @Query("cursor")String nextCursor);
+
+    @POST("users/{id}/followers/")
+    Call<FollowResponse> follow(@Path("id") String userId);
+
+    @DELETE("users/{followed_id}/followers/{follower_id}/")
+    Call<FollowResponse> unfollow(@Path("followed_id") String followerUserId,
+                                  @Path("follower_id") String followedUserId);
+
 }

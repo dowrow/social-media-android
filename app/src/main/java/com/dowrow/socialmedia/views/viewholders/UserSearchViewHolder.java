@@ -1,7 +1,6 @@
 package com.dowrow.socialmedia.views.viewholders;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dowrow.socialmedia.R;
+import com.dowrow.socialmedia.controllers.FollowController;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.views.activities.UserProfileActivity;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
@@ -29,12 +29,15 @@ public class UserSearchViewHolder extends RecyclerView.ViewHolder {
 
     private TextView username;
 
+    private FollowController followController;
+
     public UserSearchViewHolder(View itemView) {
         super(itemView);
         view = itemView;
         followButton = (Button) view.findViewById(R.id.search_user_follow_button);
         profilePicture = (ImageView) view.findViewById(R.id.search_user_profile_picture);
         username = (TextView) view.findViewById(R.id.search_user_username);
+        followController = new FollowController(itemView.getContext());
     }
 
     public void bind(final UserResponse userResponse) {
@@ -66,7 +69,15 @@ public class UserSearchViewHolder extends RecyclerView.ViewHolder {
                                         }
                                     }
 
-        );
+                );
+        followController.styleFollowButton(userResponse, followButton);
+        followButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                followController.toggleFollow(userResponse);
+                followController.styleFollowButton(userResponse, followButton);
+            }
+        });
     }
 
     private void openUserProfile(UserResponse userResponse) {

@@ -24,14 +24,15 @@
             android:layout_alignParentTop="true"
             android:layout_alignRight="@+id/publish_imageView"
             android:layout_alignEnd="@+id/publish_imageView"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:inputType="textEmailSubject"
             android:hint="Add title" />
 
         <Button
-            style="@style/LinearButton"
+            style="@style/SolidButton"
             android:id="@+id/publish_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:text="@string/publish_button"
             android:onClick="publish" />
     </LinearLayout>
@@ -40,8 +41,8 @@
         android:layout_height="match_parent"
         android:gravity="center">
         <com.dowrow.socialmedia.views.custom.SquareImageView
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
             android:gravity="center_vertical"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:id="@+id/publish_imageView" />

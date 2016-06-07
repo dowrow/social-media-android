@@ -63,7 +63,6 @@ public abstract class AbstractUserFeedController {
 
         public void refresh() {
             nextCursor = "";
-            adapter.clear();
             loadMore();
             endlessRecyclerViewScrollListener.reset();
         }
@@ -74,6 +73,7 @@ public abstract class AbstractUserFeedController {
                 userHeaderRequest.enqueue(new Callback<UserResponse>() {
                     @Override
                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                        adapter.clear();
                         adapter.add(response.body());
                         loadUsers();
                     }
@@ -105,6 +105,7 @@ public abstract class AbstractUserFeedController {
 
                     if (response != null && response.body() != null) {
                         Log.d("loadUsers() success", response.body().getResults().toString());
+                        adapter.clear();
                         adapter.addAll(response.body().getResults());
                         try {
                             nextCursor = response.body().getCursorNext();

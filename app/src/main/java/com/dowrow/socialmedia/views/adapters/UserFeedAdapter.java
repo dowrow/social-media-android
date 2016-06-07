@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.views.viewholders.UserSearchViewHolder;

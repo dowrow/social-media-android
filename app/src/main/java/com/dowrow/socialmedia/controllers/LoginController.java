@@ -47,10 +47,12 @@ public class LoginController {
     }
 
     private void clearStoredSession() {
-        SharedPreferences sharedPref = loginActivity.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.clear();
-        editor.commit();
+        if (loginActivity != null) {
+            SharedPreferences sharedPref = loginActivity.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.clear();
+            editor.commit();
+        }
     }
 
     public boolean isSessionStored() {

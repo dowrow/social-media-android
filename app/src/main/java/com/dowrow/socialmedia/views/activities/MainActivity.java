@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String IMAGE_FILE = "IMAGE_FILE";
 
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +35,21 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         viewPager.setAdapter(new MainActivityFragmentPagerAdapter(getSupportFragmentManager(), this));
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
         setPublishCallback();
+
+    }
+
+    public void hideFAB() {
+        fab.setVisibility(View.INVISIBLE);
+    }
+    public void showFAB() {
+        fab.setVisibility(View.VISIBLE);
     }
 
     private void setPublishCallback() {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         final Activity thisActivity = this;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

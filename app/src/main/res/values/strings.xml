@@ -9,7 +9,5 @@
     <string name="menu_main_delete_account_title">Delete account</string>
     <string name="publish_button">Publish</string>
     <string name="authorization_header">AUTHORIZATION_HEADER</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- TODO: Add ALL strings here -->
 </resources>

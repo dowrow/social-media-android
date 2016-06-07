@@ -1,33 +1,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.dowrow.socialmedia.views.fragments.UserSearchFragment"
-    android:orientation="vertical"
-   >
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/activity_vertical_margin"
+        android:background="@color/white"
         >
-        <EditText
+        <SearchView
             android:id="@+id/search_text"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Search by username"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-        <Button
+            android:queryHint="Search by username"
+            android:iconifiedByDefault="false"
+            />
+        <!--<Button
             android:id="@+id/search_button"
-            style="@style/LinearButton"
+            style="@style/SolidButton"
             android:text="Search"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="36dp"
+            />-->
 
     </LinearLayout>
 
     <include
-        layout="@layout/infinite_feed"/>
+        layout="@layout/infinite_feed"
+        />
 
 </LinearLayout>
