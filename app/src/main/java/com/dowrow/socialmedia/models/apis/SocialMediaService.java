@@ -10,8 +10,6 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -36,6 +34,9 @@ public interface SocialMediaService {
 
     @GET("publications/")
     Call<PaginatedResponse<PublicationResponse>> getGlobalPublications(@Query("cursor") String cursor);
+
+    @GET("publications/home/")
+    Call<PaginatedResponse<PublicationResponse>> getHomePublications(@Query("cursor") String nextCursor);
 
     @DELETE("publications/{id}/")
     Call<ResponseBody> deletePublication(@Path("id") String publicationId);

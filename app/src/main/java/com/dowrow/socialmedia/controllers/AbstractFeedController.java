@@ -5,6 +5,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
@@ -74,6 +77,7 @@ public abstract class AbstractFeedController {
             userHeaderRequest.enqueue(new Callback<UserResponse>() {
                     @Override
                     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+
                         adapter.add(response.body());
                         loadPublications();
                     }
@@ -93,7 +97,6 @@ public abstract class AbstractFeedController {
             @Override
             public void onResponse(Call<PaginatedResponse<PublicationResponse>> call,
                                    Response<PaginatedResponse<PublicationResponse>> response) {
-
                 if (!response.isSuccessful()) {
                     Log.d("loadMore", "response not successful");
                 }
@@ -103,6 +106,7 @@ public abstract class AbstractFeedController {
                 }
 
                 if (response != null && response.body() != null) {
+
                     adapter.addAll(response.body().getResults());
                     try {
                         nextCursor = response.body().getCursorNext();
@@ -130,5 +134,4 @@ public abstract class AbstractFeedController {
     public abstract Call<UserResponse> getUserHeaderRequest();
 
     public abstract Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor);
-
 }

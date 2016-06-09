@@ -7,17 +7,38 @@
     android:layout_below="@+id/bar_layout"
     android:clipToPadding="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    
+    <LinearLayout
+        android:id="@+id/empty_feed"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You are not following anyone."
+            android:layout_margin="@dimen/activity_horizontal_margin"
+        />
+        <Button style="@style/SolidButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Start following users"
+            />
+    </LinearLayout>
 
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/publication_feed"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/lightGray"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_below="@+id/bar_layout"
-    android:clipToPadding="false"
-    />
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/publication_feed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/lightGray"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@+id/bar_layout"
+        android:clipToPadding="false"
+        />
 
 </android.support.v4.widget.SwipeRefreshLayout>
