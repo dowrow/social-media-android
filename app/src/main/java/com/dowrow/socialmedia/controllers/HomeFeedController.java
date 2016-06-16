@@ -1,9 +1,7 @@
 package com.dowrow.socialmedia.controllers;
 
 import android.support.v4.app.Fragment;
-import android.view.View;
 
-import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.models.entities.PaginatedResponse;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
@@ -25,12 +23,6 @@ public class HomeFeedController extends AbstractFeedController {
 
     private HomeFeedController(Fragment fragment) {
         super(fragment);
-        if (adapter.isEmpty()) {
-            mFragment.getView().findViewById(R.id.empty_feed).setVisibility(View.VISIBLE);
-        } else {
-            mFragment.getView().findViewById(R.id.empty_feed).setVisibility(View.INVISIBLE);
-        }
-
     }
 
     @Override

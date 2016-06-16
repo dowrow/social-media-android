@@ -27,13 +27,21 @@ public class UserResponse implements Serializable {
     @Expose
     private String profilePicture;
 
+    @SerializedName("followed")
+    @Expose
+    private boolean followed;
+
     @SerializedName("publications_count")
     @Expose
     private int publicationsCount;
 
-    @SerializedName("followed")
+    @SerializedName("followers_count")
     @Expose
-    private boolean followed;
+    private int followersCount;
+
+    @SerializedName("following_count")
+    @Expose
+    private int followingCount;
 
     public Integer getId() {
         return id;
@@ -63,4 +71,19 @@ public class UserResponse implements Serializable {
         this.followed = followed;
     }
 
+    public int getFollowersCount() {
+        return followersCount;
+    }
+
+    public void setFollowersCount(int followersCount) {
+        this.followersCount = followersCount;
+    }
+
+    public int getFollowingCount() {
+        return followingCount;
+    }
+
+    public void setFollowingCount(int followingCount) {
+        this.followingCount = followingCount;
+    }
 }

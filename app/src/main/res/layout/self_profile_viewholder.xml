@@ -18,28 +18,107 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         />
 
-    <TextView
-        android:id="@+id/self_profile_username"
-        android:text="Username"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:ellipsize="end"
-        android:singleLine="true"
-        />
 
     <TextView
-        android:id="@+id/self_profile_stats"
-        android:text="60 pubs · 50 followers · 23k following"
-        android:textSize="16dp"
+        android:id="@+id/self_profile_username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:text="Username"
         android:textAlignment="center"
-        />
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        >
+        <TextView
+            android:id="@+id/self_profile_publication_count"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="60"
+            android:textAlignment="center"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:padding="0dp"
+            />
+        <TextView
+            android:id="@+id/self_profile_following_count"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="60"
+            android:textAlignment="center"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+
+
+            />
+        <TextView
+            android:id="@+id/self_profile_followers_count"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="60"
+            android:textAlignment="center"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        >
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="PHOTOS"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            android:textAllCaps="true"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="FOLLOWING"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            android:textAllCaps="true"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="FOLLOWERS"
+            android:textAlignment="center"
+            android:textSize="12dp"
+            android:textAllCaps="true"
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:gravity="center"
@@ -63,7 +142,6 @@
             android:text="Log out"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-
             style="@style/SolidButton"
             />
 

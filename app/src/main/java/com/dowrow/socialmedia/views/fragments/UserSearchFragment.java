@@ -7,13 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SearchView;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.UserSearchController;
-import com.twitter.sdk.android.core.models.Search;
 
 public class UserSearchFragment extends Fragment {
 

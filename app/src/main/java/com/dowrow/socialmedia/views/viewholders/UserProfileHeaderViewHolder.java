@@ -2,14 +2,13 @@ package com.dowrow.socialmedia.views.viewholders;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dowrow.socialmedia.controllers.FollowController;
 import com.dowrow.socialmedia.R;
+import com.dowrow.socialmedia.controllers.FollowController;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -23,7 +22,11 @@ public class UserProfileHeaderViewHolder extends RecyclerView.ViewHolder {
 
     private TextView username;
 
-    private TextView stats;
+    private TextView publicationsCount;
+
+    private TextView followersCount;
+
+    private TextView followingCount;
 
     private FollowController followController;
 
@@ -32,7 +35,9 @@ public class UserProfileHeaderViewHolder extends RecyclerView.ViewHolder {
         view = v;
         profilePicture = (ImageView) v.findViewById(R.id.self_profile_picture);
         username = (TextView) v.findViewById(R.id.self_profile_username);
-        stats = (TextView) v.findViewById(R.id.self_profile_stats);
+        publicationsCount = (TextView) v.findViewById(R.id.user_profile_publication_count);
+        followersCount = (TextView) v.findViewById(R.id.user_profile_followers_count);
+        followingCount = (TextView) v.findViewById(R.id.user_profile_following_count);
         followController = new FollowController(view.getContext());
     }
 
@@ -43,8 +48,10 @@ public class UserProfileHeaderViewHolder extends RecyclerView.ViewHolder {
                 .oval(false)
                 .build();
         Picasso.with(context).load(user.getProfilePicture()).transform(circleTransformation).into(profilePicture);
-        username.setText(user.getUsername());
-        stats.setText(user.getPublicationsCount() + " publications");
+        username.setText(user.getUsername().toString());
+        publicationsCount.setText(user.getPublicationsCount() + "");
+        followingCount.setText(user.getFollowingCount() + "");
+        followersCount.setText(user.getFollowersCount() + "");
         final Button followButton = (Button)view.findViewById(R.id.follow_button);
         followController.styleFollowButton(user, followButton);
         followButton.setOnClickListener(new View.OnClickListener() {

@@ -23,7 +23,11 @@ public class SelfProfileHeaderViewHolder extends RecyclerView.ViewHolder {
 
     private TextView username;
 
-    private TextView stats;
+    private TextView publicationsCount;
+
+    private TextView followersCount;
+
+    private TextView followingCount;
 
     private DeleteAccountController deleteAccountController;
 
@@ -32,7 +36,9 @@ public class SelfProfileHeaderViewHolder extends RecyclerView.ViewHolder {
         view = v;
         profilePicture = (ImageView) v.findViewById(R.id.self_profile_picture);
         username = (TextView) v.findViewById(R.id.self_profile_username);
-        stats = (TextView) v.findViewById(R.id.self_profile_stats);
+        publicationsCount = (TextView) v.findViewById(R.id.self_profile_publication_count);
+        followersCount = (TextView) v.findViewById(R.id.self_profile_followers_count);
+        followingCount = (TextView) v.findViewById(R.id.self_profile_following_count);
         deleteAccountController = new DeleteAccountController();
     }
 
@@ -43,8 +49,10 @@ public class SelfProfileHeaderViewHolder extends RecyclerView.ViewHolder {
                 .oval(false)
                 .build();
         Picasso.with(context).load(user.getProfilePicture()).transform(circleTransformation).into(profilePicture);
-        username.setText(user.getUsername());
-        stats.setText(user.getPublicationsCount() + " publications");
+        username.setText(user.getUsername().toString());
+        publicationsCount.setText(user.getPublicationsCount() + "");
+        followingCount.setText(user.getFollowingCount() + "");
+        followersCount.setText(user.getFollowersCount() + "");
         view.findViewById(R.id.logout_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

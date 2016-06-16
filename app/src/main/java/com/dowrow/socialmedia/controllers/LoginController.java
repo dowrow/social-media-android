@@ -160,6 +160,7 @@ public class LoginController {
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 progress.dismiss();
+                Log.d("error", t + " - " + t.getMessage() + " ");
                 Toast toast = Toast.makeText(loginActivity, "The server failed to respond.", Toast.LENGTH_LONG);
                 toast.show();
                 logOut(loginActivity);
