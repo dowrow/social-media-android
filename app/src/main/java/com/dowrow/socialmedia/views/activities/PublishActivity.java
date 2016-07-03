@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.PublishController;
+import com.dowrow.socialmedia.controllers.publications.PublishController;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;

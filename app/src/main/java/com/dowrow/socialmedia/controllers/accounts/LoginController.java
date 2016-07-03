@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.accounts;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -9,9 +9,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.sociallogin.FacebookLoginController;
-import com.dowrow.socialmedia.controllers.sociallogin.SocialLoginController;
-import com.dowrow.socialmedia.controllers.sociallogin.TwitterLoginController;
+import com.dowrow.socialmedia.controllers.accounts.sociallogin.FacebookLoginController;
+import com.dowrow.socialmedia.controllers.accounts.sociallogin.SocialLoginController;
+import com.dowrow.socialmedia.controllers.accounts.sociallogin.TwitterLoginController;
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.apis.SocialMediaService;
 import com.dowrow.socialmedia.models.entities.UserResponse;

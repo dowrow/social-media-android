@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.accounts;
 
 import android.content.Context;
 import android.util.Log;

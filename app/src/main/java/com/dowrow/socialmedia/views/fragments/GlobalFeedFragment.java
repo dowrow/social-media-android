@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.feedcontrollers.GlobalFeedController;
+import com.dowrow.socialmedia.controllers.feeds.GlobalFeedController;
 
 public class GlobalFeedFragment extends Fragment {
 

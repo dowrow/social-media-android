@@ -1,6 +1,6 @@
 package com.dowrow.socialmedia.models.apis;
 
-import com.dowrow.socialmedia.controllers.LoginController;
+import com.dowrow.socialmedia.controllers.accounts.LoginController;
 
 import java.io.IOException;
 

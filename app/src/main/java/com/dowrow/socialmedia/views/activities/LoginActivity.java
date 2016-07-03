@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.LoginController;
+import com.dowrow.socialmedia.controllers.accounts.LoginController;
 
 public class LoginActivity extends AppCompatActivity {
 

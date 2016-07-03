@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.LoginController;
+import com.dowrow.socialmedia.controllers.accounts.LoginController;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.views.viewholders.PublicationViewHolder;

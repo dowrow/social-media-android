@@ -3,7 +3,7 @@ package com.dowrow.socialmedia.views.viewholders;
 import android.view.View;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.DeletePublicationController;
+import com.dowrow.socialmedia.controllers.publications.DeletePublicationController;
 
 public class SelfPublicationViewHolder extends PublicationViewHolder {
 

@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.FollowController;
+import com.dowrow.socialmedia.controllers.accounts.FollowController;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;

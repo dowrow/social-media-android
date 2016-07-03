@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.feedcontrollers.UserProfileController;
+import com.dowrow.socialmedia.controllers.feeds.UserProfileController;
 
 public class UserProfileFragment extends Fragment {
 

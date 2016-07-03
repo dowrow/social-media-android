@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.feedcontrollers.UserProfileController;
+import com.dowrow.socialmedia.controllers.feeds.UserProfileController;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 
 public class UserProfileActivity extends AppCompatActivity {

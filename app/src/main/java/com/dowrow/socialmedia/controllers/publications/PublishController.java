@@ -1,12 +1,12 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.publications;
 
 import android.app.Activity;
 import android.widget.Toast;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.feedcontrollers.GlobalFeedController;
-import com.dowrow.socialmedia.controllers.feedcontrollers.HomeFeedController;
-import com.dowrow.socialmedia.controllers.feedcontrollers.SelfProfileController;
+import com.dowrow.socialmedia.controllers.feeds.GlobalFeedController;
+import com.dowrow.socialmedia.controllers.feeds.HomeFeedController;
+import com.dowrow.socialmedia.controllers.feeds.SelfProfileController;
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.apis.SocialMediaService;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;

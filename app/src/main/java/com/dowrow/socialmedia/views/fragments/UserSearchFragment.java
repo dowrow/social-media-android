@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.feedcontrollers.UserSearchController;
+import com.dowrow.socialmedia.controllers.feeds.UserSearchController;
 
 public class UserSearchFragment extends Fragment {
 

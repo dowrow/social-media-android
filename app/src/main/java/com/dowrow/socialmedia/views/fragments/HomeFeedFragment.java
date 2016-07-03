@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.feedcontrollers.HomeFeedController;
+import com.dowrow.socialmedia.controllers.feeds.HomeFeedController;
 
 public class HomeFeedFragment extends Fragment {
 

@@ -1,25 +1,26 @@
-package com.dowrow.socialmedia.controllers.feedcontrollers;
+package com.dowrow.socialmedia.controllers.feeds;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.entities.PaginatedResponse;
+import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.models.exceptions.NoMorePagesException;
+import com.dowrow.socialmedia.views.activities.MainActivity;
+import com.dowrow.socialmedia.views.adapters.ComplexFeedAdapter;
 import com.dowrow.socialmedia.views.adapters.EndlessRecyclerViewScrollListener;
-import com.dowrow.socialmedia.views.adapters.UserFeedAdapter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public abstract class AbstractUserFeedController {
+public abstract class AbstractFeedController {
 
     protected SocialMediaAPI api;
 
@@ -27,7 +28,7 @@ public abstract class AbstractUserFeedController {
 
     protected Fragment mFragment;
 
-    protected UserFeedAdapter adapter;
+    protected ComplexFeedAdapter adapter;
 
     private RecyclerView recyclerView;
 
@@ -37,18 +38,30 @@ public abstract class AbstractUserFeedController {
 
     private EndlessRecyclerViewScrollListener endlessRecyclerViewScrollListener;
 
-    public AbstractUserFeedController(Fragment fragment) {
+    public AbstractFeedController(Fragment fragment) {
         mFragment = fragment;
         api = new SocialMediaAPI();
         recyclerView = (RecyclerView) fragment.getView().findViewById(R.id.publication_feed);
         swipeRefreshLayout = (SwipeRefreshLayout) fragment.getView().findViewById(R.id.publication_feed_swipe);
         layoutManager = new LinearLayoutManager(fragment.getView().getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new UserFeedAdapter();
+        adapter = new ComplexFeedAdapter();
         endlessRecyclerViewScrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
                 loadMore();
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    MainActivity.showFAB();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView view, int dx, int dy) {
+                MainActivity.hideFAB();
             }
         };
         recyclerView.setAdapter(adapter);
@@ -63,6 +76,7 @@ public abstract class AbstractUserFeedController {
 
     public void refresh() {
         nextCursor = "";
+        adapter.clear();
         loadMore();
         endlessRecyclerViewScrollListener.reset();
     }
@@ -73,30 +87,28 @@ public abstract class AbstractUserFeedController {
             userHeaderRequest.enqueue(new Callback<UserResponse>() {
                 @Override
                 public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                    adapter.clear();
+
                     adapter.add(response.body());
-                    loadUsers();
+                    loadPublications();
                 }
 
                 @Override
                 public void onFailure(Call<UserResponse> call, Throwable t) {
-                    loadUsers();
+                    loadPublications();
                 }
             });
         } else {
-            loadUsers();
+            loadPublications();
         }
     }
 
-    public void loadUsers() {
-        getLoadMoreRequest(nextCursor).enqueue(new Callback<PaginatedResponse<UserResponse>>() {
+    public void loadPublications() {
+        getLoadMoreRequest(nextCursor).enqueue(new Callback<PaginatedResponse<PublicationResponse>>() {
             @Override
-            public void onResponse(Call<PaginatedResponse<UserResponse>> call,
-                                   Response<PaginatedResponse<UserResponse>> response) {
+            public void onResponse(Call<PaginatedResponse<PublicationResponse>> call,
+                                   Response<PaginatedResponse<PublicationResponse>> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(mFragment.getContext(), R.string.no_results, Toast.LENGTH_SHORT).show();
-                    Log.d("loadUsers", "response not successful");
-                    Log.d("response", response.code() + "");
+                    Log.d("loadMore", "response not successful");
                 }
 
                 if (nextCursor == null) {
@@ -104,8 +116,7 @@ public abstract class AbstractUserFeedController {
                 }
 
                 if (response != null && response.body() != null) {
-                    Log.d("loadUsers() success", response.body().getResults().toString());
-                    adapter.clear();
+
                     adapter.addAll(response.body().getResults());
                     try {
                         nextCursor = response.body().getCursorNext();
@@ -113,20 +124,25 @@ public abstract class AbstractUserFeedController {
                         nextCursor = null;
                     }
                 } else {
-                    Log.d("loadUsers()", "null response");
+                    Log.d("loadMore()", "null response");
                 }
+
                 swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
-            public void onFailure(Call<PaginatedResponse<UserResponse>> call, Throwable t) {
+            public void onFailure(Call<PaginatedResponse<PublicationResponse>> call, Throwable t) {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
+    public void remove(Object item) {
+        adapter.remove(item);
+    }
+
     public abstract Call<UserResponse> getUserHeaderRequest();
 
-    public abstract Call<PaginatedResponse<UserResponse>> getLoadMoreRequest(String nextCursor);
+    public abstract Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor);
 
 }

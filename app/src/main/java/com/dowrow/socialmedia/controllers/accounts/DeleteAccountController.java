@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.accounts;
 
 import android.app.Activity;
 import android.app.AlertDialog;
