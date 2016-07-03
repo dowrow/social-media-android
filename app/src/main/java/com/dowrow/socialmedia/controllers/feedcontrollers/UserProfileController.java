@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.feedcontrollers;
 
 import android.support.v4.app.Fragment;
 

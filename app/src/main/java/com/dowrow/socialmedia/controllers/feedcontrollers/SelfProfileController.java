@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.feedcontrollers;
 
 import android.support.v4.app.Fragment;
 
@@ -8,31 +8,31 @@ import com.dowrow.socialmedia.models.entities.UserResponse;
 
 import retrofit2.Call;
 
-public class HomeFeedController extends AbstractFeedController {
+public class SelfProfileController extends AbstractFeedController {
 
-    private static HomeFeedController instance = null;
+    private static SelfProfileController instance = null;
 
-    public static HomeFeedController getInstance(Fragment fragment) {
-        instance = new HomeFeedController(fragment);
+    public static SelfProfileController getInstance(Fragment fragment) {
+        instance = new SelfProfileController(fragment);
         return instance;
     }
 
-    public static HomeFeedController getInstance() {
+    public static SelfProfileController getInstance() {
         return instance;
     }
 
-    private HomeFeedController(Fragment fragment) {
+    private SelfProfileController(Fragment fragment) {
         super(fragment);
     }
 
     @Override
     public Call<UserResponse> getUserHeaderRequest() {
-        return null;
+        return api.getService().getSelf();
     }
 
     @Override
     public Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor) {
-       return api.getService().getHomePublications(nextCursor);
+        return api.getService().getSelfPublications(nextCursor);
     }
 
 }

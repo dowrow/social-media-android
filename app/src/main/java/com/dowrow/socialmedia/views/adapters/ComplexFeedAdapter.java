@@ -126,11 +126,7 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public void remove(Object item) {
-        Log.d("remove", "item = " + item);
-        Log.d("remove", "items = " + items);
-        Log.d("remove", "count = " + items.size());
         int position = items.indexOf(item);
-        Log.d("remove", "position = " + position);
         items.remove(position);
         notifyItemRemoved(position);
     }

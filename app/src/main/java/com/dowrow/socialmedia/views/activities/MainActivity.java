@@ -24,26 +24,58 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 public class MainActivity extends AppCompatActivity {
 
     private static final String IMAGE_FILE = "IMAGE_FILE";
+    private static final int INDEX_OF_TAB_WITHOUT_FAB = 2;
 
-    private FloatingActionButton fab;
+    private static FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+            return;
+        }
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new MainActivityFragmentPagerAdapter(getSupportFragmentManager(), this));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                manageFAB(position);
+            }
+
+            private void manageFAB(int position) {
+                switch (position) {
+                    case INDEX_OF_TAB_WITHOUT_FAB:
+                        fab.hide();
+                        break;
+                    default:
+                        fab.show();
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
         setPublishCallback();
     }
 
-    public void hideFAB() {
-        fab.setVisibility(View.INVISIBLE);
+    public static void hideFAB() {
+        fab.hide();
     }
-    public void showFAB() {
-        fab.setVisibility(View.VISIBLE);
+
+    public static void showFAB() {
+        fab.show();
     }
 
     private void setPublishCallback() {
@@ -101,6 +133,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("Main activity", "destroyed");
+
     }
 }

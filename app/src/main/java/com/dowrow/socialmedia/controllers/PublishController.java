@@ -3,6 +3,9 @@ package com.dowrow.socialmedia.controllers;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.dowrow.socialmedia.controllers.feedcontrollers.GlobalFeedController;
+import com.dowrow.socialmedia.controllers.feedcontrollers.HomeFeedController;
+import com.dowrow.socialmedia.controllers.feedcontrollers.SelfProfileController;
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.apis.SocialMediaService;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
@@ -35,6 +38,7 @@ public class PublishController {
                     try {
                         GlobalFeedController.getInstance().refresh();
                         SelfProfileController.getInstance().refresh();
+                        HomeFeedController.getInstance().refresh();
                     } catch (Exception e) {
 
                     }

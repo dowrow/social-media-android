@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.feedcontrollers;
 
 import android.support.v4.app.Fragment;
 
@@ -7,7 +7,7 @@ import com.dowrow.socialmedia.models.entities.UserResponse;
 
 import retrofit2.Call;
 
-public class UserSearchController extends AbstractUserFeedController{
+public class UserSearchController extends AbstractUserFeedController {
 
     private static UserSearchController instance = null;
 

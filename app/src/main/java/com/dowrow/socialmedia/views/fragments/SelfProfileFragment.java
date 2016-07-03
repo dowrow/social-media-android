@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.DeleteAccountController;
-import com.dowrow.socialmedia.controllers.SelfProfileController;
+import com.dowrow.socialmedia.controllers.feedcontrollers.SelfProfileController;
 
 public class SelfProfileFragment extends Fragment {
 

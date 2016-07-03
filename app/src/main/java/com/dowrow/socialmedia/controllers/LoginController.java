@@ -61,7 +61,7 @@ public class LoginController {
         return !authorizationHeader.isEmpty();
     }
 
-    public String getStoredAuthorizationHeader() {
+    private String getStoredAuthorizationHeader() {
         SharedPreferences sharedPref = loginActivity.getPreferences(Context.MODE_PRIVATE);
         return sharedPref.getString(loginActivity.getString(R.string.authorization_header), "");
     }

@@ -25,6 +25,7 @@ public class SocialMediaAPI {
                 return chain.proceed(request);
             }
         }).build();
+
         Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).client(httpClient).build();
         return retrofit.create(SocialMediaService.class);
     }

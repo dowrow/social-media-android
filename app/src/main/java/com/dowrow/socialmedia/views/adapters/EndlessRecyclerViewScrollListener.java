@@ -3,6 +3,8 @@ package com.dowrow.socialmedia.views.adapters;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.dowrow.socialmedia.views.activities.MainActivity;
+
 public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
 
     private int visibleThreshold = 5;
@@ -33,6 +35,12 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
             }
         }
         return maxSize;
+    }
+
+    @Override
+    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        super.onScrollStateChanged(recyclerView, newState);
+
     }
 
     @Override

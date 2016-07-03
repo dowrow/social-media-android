@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.dowrow.socialmedia.controllers.feedcontrollers.GlobalFeedController;
+import com.dowrow.socialmedia.controllers.feedcontrollers.HomeFeedController;
+import com.dowrow.socialmedia.controllers.feedcontrollers.SelfProfileController;
 import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 
@@ -31,8 +34,9 @@ public class DeletePublicationController {
                                             GlobalFeedController.getInstance().remove(publicationResponse);
                                             Log.d("Delete publication", "self");
                                             SelfProfileController.getInstance().remove(publicationResponse);
+                                            Log.d("Delete publication", "home");
+                                            HomeFeedController.getInstance().remove(publicationResponse);
                                         } catch (Exception e) {
-                                            Log.d("Delete publication", e.getMessage());
 
                                         }
                                         Toast toast = Toast.makeText(view.getContext(), "Deleted!", Toast.LENGTH_SHORT);

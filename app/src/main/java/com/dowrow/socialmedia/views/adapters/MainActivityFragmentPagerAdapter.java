@@ -2,6 +2,7 @@ package com.dowrow.socialmedia.views.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,6 +12,7 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 
 import com.dowrow.socialmedia.R;
+import com.dowrow.socialmedia.views.activities.MainActivity;
 import com.dowrow.socialmedia.views.fragments.GlobalFeedFragment;
 import com.dowrow.socialmedia.views.fragments.HomeFeedFragment;
 import com.dowrow.socialmedia.views.fragments.SelfProfileFragment;
@@ -21,7 +23,7 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
     private String tabTitles[] = new String[] { "Home", "Global Feed", "Search user", "Profile" };
 
     private Context context;
-
+    
     private int[] imageResId = {
             R.drawable.ic_home,
             R.drawable.ic_global_feed,
@@ -63,4 +65,5 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
         sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sb;
     }
+
 }

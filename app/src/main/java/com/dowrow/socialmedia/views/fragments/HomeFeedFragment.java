@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dowrow.socialmedia.R;
-import com.dowrow.socialmedia.controllers.HomeFeedController;
+import com.dowrow.socialmedia.controllers.feedcontrollers.HomeFeedController;
 
 public class HomeFeedFragment extends Fragment {
 
@@ -30,7 +30,6 @@ public class HomeFeedFragment extends Fragment {
         super.onViewCreated(view, bundle);
         homeFeedController = HomeFeedController.getInstance(this);
         homeFeedController.loadMore();
-
     }
 
 }

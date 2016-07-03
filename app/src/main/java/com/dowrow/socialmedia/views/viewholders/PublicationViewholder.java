@@ -50,10 +50,12 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
     public void bind(PublicationResponse publicationResponse) {
         this.publicationResponse = publicationResponse;
         Context context = view.getContext();
+
         Transformation circleTransformation = new RoundedTransformationBuilder()
                 .cornerRadiusDp(50)
                 .oval(false)
                 .build();
+
         Picasso.with(context)
                 .load(publicationResponse.getAuthorDetails().getProfilePicture())
                 .placeholder(new ColorDrawable(view.getResources().getColor(R.color.lightGray)))
@@ -67,6 +69,7 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
                 .fit()
                 .centerCrop()
                 .into(image);
+
         username.setText(publicationResponse.getAuthorDetails().getUsername());
         username.setOnClickListener(new View.OnClickListener() {
             @Override

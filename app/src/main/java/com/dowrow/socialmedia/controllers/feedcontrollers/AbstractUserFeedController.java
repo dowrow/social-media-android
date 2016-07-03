@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.feedcontrollers;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +12,7 @@ import com.dowrow.socialmedia.models.apis.SocialMediaAPI;
 import com.dowrow.socialmedia.models.entities.PaginatedResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.models.exceptions.NoMorePagesException;
+import com.dowrow.socialmedia.views.activities.MainActivity;
 import com.dowrow.socialmedia.views.adapters.EndlessRecyclerViewScrollListener;
 import com.dowrow.socialmedia.views.adapters.UserFeedAdapter;
 

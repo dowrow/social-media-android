@@ -1,4 +1,4 @@
-package com.dowrow.socialmedia.controllers;
+package com.dowrow.socialmedia.controllers.feedcontrollers;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +12,7 @@ import com.dowrow.socialmedia.models.entities.PaginatedResponse;
 import com.dowrow.socialmedia.models.entities.PublicationResponse;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 import com.dowrow.socialmedia.models.exceptions.NoMorePagesException;
+import com.dowrow.socialmedia.views.activities.MainActivity;
 import com.dowrow.socialmedia.views.adapters.ComplexFeedAdapter;
 import com.dowrow.socialmedia.views.adapters.EndlessRecyclerViewScrollListener;
 
@@ -37,6 +38,8 @@ public abstract class AbstractFeedController {
 
     private EndlessRecyclerViewScrollListener endlessRecyclerViewScrollListener;
 
+    private boolean publicable = true;
+
     public AbstractFeedController(Fragment fragment) {
         mFragment = fragment;
         api = new SocialMediaAPI();
@@ -49,6 +52,18 @@ public abstract class AbstractFeedController {
             @Override
             public void onLoadMore() {
                 loadMore();
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState){
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    MainActivity.showFAB();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView view, int dx, int dy) {
+                MainActivity.hideFAB();
             }
         };
         recyclerView.setAdapter(adapter);
@@ -131,4 +146,12 @@ public abstract class AbstractFeedController {
     public abstract Call<UserResponse> getUserHeaderRequest();
 
     public abstract Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor);
+
+    public boolean isPublicable() {
+        return publicable;
+    }
+
+    public void setPublicable(boolean publicable) {
+        this.publicable = publicable;
+    }
 }
