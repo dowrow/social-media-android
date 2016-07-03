@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">SocialMedia</string>
-    <string name="facebook_app_id">1106502439370568</string>
-    <string name="fabric_api_key">OpuGF0EVj6JL4crX7oAl35aCz</string>
-    <string name="twitter_app_id">Q0SpViJpCodWGHhLlOEs9WrUc</string>
-    <string name="twitter_api_key">N4CELsGF109WiphSBw2jgm6CqA38P9IhmMOA9CKplBWhlQ1IXn</string>
-    <string name="title_activity_global_feed">GlobalFeedActivity</string>
+    <string name="facebook_app_id" translatable="false">1106502439370568</string>
+    <string name="fabric_api_key" translatable="false">OpuGF0EVj6JL4crX7oAl35aCz</string>
+    <string name="twitter_app_id" translatable="false">Q0SpViJpCodWGHhLlOEs9WrUc</string>
+    <string name="twitter_api_key" translatable="false">N4CELsGF109WiphSBw2jgm6CqA38P9IhmMOA9CKplBWhlQ1IXn</string>
     <string name="menu_main_logout_title">Log out</string>
     <string name="menu_main_delete_account_title">Delete account</string>
     <string name="publish_button">Publish</string>
-    <string name="authorization_header">AUTHORIZATION_HEADER</string>
+    <string name="authorization_header" translatable="false">AUTHORIZATION_HEADER</string>
     <string name="no_results">No results</string>
     <string name="account_deleted">Your account has been deleted forever.</string>
     <string name="server_failed">The server failed to respond.</string>
@@ -23,7 +22,6 @@
     <string name="wrong_credentials_notification">Wrong user or password. Try again.</string>
     <string name="logging_in">Logging in...</string>
     <string name="welcome">"Welcome "</string>
-    <string name="server_failed_notification">The server failed to respond.</string>
     <string name="could_not_publish">We couldn\'t publish your picture</string>
     <string name="published">Published!</string>
     <string name="error_publishing">Error publishing your picture</string>
@@ -41,4 +39,4 @@
     <string name="photos_subtitle">PHOTOS</string>
     <string name="following_subtitle">FOLLOWING</string>
     <string name="followers_subtitle">FOLLOWERS</string>
-</resources>
+s</resources>

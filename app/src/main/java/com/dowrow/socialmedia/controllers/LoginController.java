@@ -161,7 +161,7 @@ public class LoginController {
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 progress.dismiss();
                 Log.d("error", t + " - " + t.getMessage() + " ");
-                Toast toast = Toast.makeText(loginActivity, R.string.server_failed_notification, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(loginActivity, R.string.server_failed, Toast.LENGTH_LONG);
                 toast.show();
                 logOut(loginActivity);
             }
