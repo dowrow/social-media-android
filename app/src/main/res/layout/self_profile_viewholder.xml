@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.dowrow.socialmedia.views.fragments.SelfProfileFragment"
     android:orientation="vertical"
@@ -7,16 +6,14 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:background="@color/white"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    >
+    android:layout_marginBottom="@dimen/activity_vertical_margin">
 
     <ImageView
         android:id="@+id/self_profile_picture"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        />
+        android:layout_marginTop="@dimen/activity_vertical_margin" />
 
 
     <TextView
@@ -30,14 +27,14 @@
         android:textStyle="bold"
         android:ellipsize="end"
         android:singleLine="true"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+        android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center"
-        >
+        android:layout_gravity="center">
+
         <TextView
             android:id="@+id/self_profile_publication_count"
             android:layout_weight="1"
@@ -49,8 +46,8 @@
             android:textSize="36dp"
             android:textStyle="bold"
             android:textAllCaps="true"
-            android:padding="0dp"
-            />
+            android:padding="0dp" />
+
         <TextView
             android:id="@+id/self_profile_following_count"
             android:layout_width="0dp"
@@ -67,6 +64,7 @@
 
 
             />
+
         <TextView
             android:id="@+id/self_profile_followers_count"
             android:layout_width="0dp"
@@ -79,45 +77,44 @@
             android:textStyle="bold"
             android:textAllCaps="true"
             android:padding="0dp"
-            android:layout_margin="0dp"
-            />
+            android:layout_margin="0dp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        >
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="PHOTOS"
+            android:text="@string/photos_subtitle"
             android:textAlignment="center"
             android:textSize="12dp"
-            android:textAllCaps="true"
-            />
+            android:textAllCaps="true" />
+
         <TextView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="FOLLOWING"
+            android:text="@string/following_subtitle"
             android:textAlignment="center"
             android:textSize="12dp"
-            android:textAllCaps="true"
-            />
+            android:textAllCaps="true" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="FOLLOWERS"
+            android:text="@string/followers_subtitle"
             android:textAlignment="center"
             android:textSize="12dp"
-            android:textAllCaps="true"
-            />
+            android:textAllCaps="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -130,20 +127,18 @@
 
         <Button
             android:id="@+id/delete_account_button"
-            android:text="Delete account"
+            android:text="@string/delete_account"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            style="@style/LinearButton"
-            />
+            style="@style/LinearButton" />
 
         <Button
             android:id="@+id/logout_button"
-            android:text="Log out"
+            android:text="@string/log_out"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            style="@style/SolidButton"
-            />
+            style="@style/SolidButton" />
 
     </LinearLayout>
 </LinearLayout>

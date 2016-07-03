@@ -32,7 +32,7 @@ public class GlobalFeedController extends AbstractFeedController {
 
     @Override
     public Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor) {
-       return api.getService().getGlobalPublications(nextCursor);
+        return api.getService().getGlobalPublications(nextCursor);
     }
 
 }

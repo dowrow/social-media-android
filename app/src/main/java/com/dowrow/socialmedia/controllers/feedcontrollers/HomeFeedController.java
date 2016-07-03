@@ -32,7 +32,7 @@ public class HomeFeedController extends AbstractFeedController {
 
     @Override
     public Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor) {
-       return api.getService().getHomePublications(nextCursor);
+        return api.getService().getHomePublications(nextCursor);
     }
 
 }

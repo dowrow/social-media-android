@@ -1,4 +1,3 @@
-
 package com.dowrow.socialmedia.models.entities;
 
 import com.google.gson.annotations.Expose;

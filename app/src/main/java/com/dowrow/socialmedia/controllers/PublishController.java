@@ -3,6 +3,7 @@ package com.dowrow.socialmedia.controllers;
 import android.app.Activity;
 import android.widget.Toast;
 
+import com.dowrow.socialmedia.R;
 import com.dowrow.socialmedia.controllers.feedcontrollers.GlobalFeedController;
 import com.dowrow.socialmedia.controllers.feedcontrollers.HomeFeedController;
 import com.dowrow.socialmedia.controllers.feedcontrollers.SelfProfileController;
@@ -43,17 +44,17 @@ public class PublishController {
 
                     }
 
-                    Toast toast = Toast.makeText(publishActivity, "Published!", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(publishActivity, R.string.published, Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    Toast toast = Toast.makeText(publishActivity, "We couldn't publish your picture", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(publishActivity, R.string.could_not_publish, Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
 
             @Override
             public void onFailure(Call<PublicationResponse> call, Throwable t) {
-                Toast toast = Toast.makeText(publishActivity, "Error publishing your picture", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(publishActivity, R.string.error_publishing, Toast.LENGTH_SHORT);
                 toast.show();
             }
         });

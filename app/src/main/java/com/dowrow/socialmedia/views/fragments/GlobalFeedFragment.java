@@ -28,7 +28,7 @@ public class GlobalFeedFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle bundle){
+    public void onViewCreated(View view, Bundle bundle) {
         super.onViewCreated(view, bundle);
         globalFeedController = GlobalFeedController.getInstance(this);
         globalFeedController.loadMore();

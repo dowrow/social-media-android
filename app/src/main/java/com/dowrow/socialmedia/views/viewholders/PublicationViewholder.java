@@ -100,12 +100,12 @@ public class PublicationViewHolder extends RecyclerView.ViewHolder {
             Long datetime = inFormat.parse(timestamp).getTime();
             Long now = new Date().getTime();
             if (datetime > now) {
-                return "Just now";
+                return view.getContext().getString(R.string.just_now);
             }
             String relativeTimeSpan = DateUtils.getRelativeTimeSpanString(datetime, now, DateUtils.SECOND_IN_MILLIS).toString();
             return relativeTimeSpan.substring(0, 1).toUpperCase() + relativeTimeSpan.substring(1);
         } catch (Exception e) {
-            return "Long time ago";
+            return view.getContext().getString(R.string.long_time_ago);
         }
     }
 }

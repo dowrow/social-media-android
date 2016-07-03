@@ -10,6 +10,7 @@ import com.dowrow.socialmedia.controllers.feedcontrollers.UserProfileController;
 import com.dowrow.socialmedia.models.entities.UserResponse;
 
 public class UserProfileActivity extends AppCompatActivity {
+
     public static final String USER = "USER";
 
     private UserResponse user;
@@ -20,12 +21,9 @@ public class UserProfileActivity extends AppCompatActivity {
         user = (UserResponse) getIntent().getSerializableExtra(USER);
         getSupportActionBar().setTitle(user.getUsername());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         setContentView(R.layout.activity_user_profile);
-
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.user_profile_fragment);
         Log.d("Creating prof act", "frgment = " + fragment);
-
     }
 
     @Override
@@ -34,7 +32,6 @@ public class UserProfileActivity extends AppCompatActivity {
         UserProfileController.getInstance().setUser(user);
         UserProfileController.getInstance().loadMore();
     }
-
 
 
 }

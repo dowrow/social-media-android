@@ -4,26 +4,24 @@
     android:layout_height="match_parent"
     tools:context="com.dowrow.socialmedia.views.fragments.UserSearchFragment"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/activity_vertical_margin"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
+
         <SearchView
             android:id="@+id/search_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Search by username"
-            android:queryHint="Search by username"
-            android:iconifiedByDefault="false"
-            />
+            android:hint="@string/search_by_username"
+            android:queryHint="@string/search_by_username"
+            android:iconifiedByDefault="false" />
 
     </LinearLayout>
 
-    <include
-        layout="@layout/infinite_feed"
-        />
+    <include layout="@layout/infinite_feed" />
 
 </LinearLayout>

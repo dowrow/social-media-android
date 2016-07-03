@@ -17,7 +17,8 @@ public class HomeFeedFragment extends Fragment {
         return new HomeFeedFragment();
     }
 
-    public HomeFeedFragment() {}
+    public HomeFeedFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,7 +27,7 @@ public class HomeFeedFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle bundle){
+    public void onViewCreated(View view, Bundle bundle) {
         super.onViewCreated(view, bundle);
         homeFeedController = HomeFeedController.getInstance(this);
         homeFeedController.loadMore();

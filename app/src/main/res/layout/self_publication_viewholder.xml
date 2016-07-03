@@ -32,7 +32,7 @@
                 android:text="Username"
                 android:textStyle="bold"
                 android:ellipsize="end"
-                android:singleLine="true"/>
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/publication_time_ago"
@@ -52,8 +52,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        />
+        android:paddingRight="0dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

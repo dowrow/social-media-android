@@ -21,11 +21,11 @@ public class PublishActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Publication preview");
+        getSupportActionBar().setTitle(R.string.publication_preview_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_publish);
         imageFile = (File) getIntent().getExtras().get("IMAGE_FILE");
-        ImageView imageView =  (ImageView) findViewById(R.id.publish_imageView);
+        ImageView imageView = (ImageView) findViewById(R.id.publish_imageView);
         Picasso.with(getApplication()).load(imageFile).fit().centerCrop().into(imageView);
     }
 
@@ -33,10 +33,11 @@ public class PublishActivity extends AppCompatActivity {
         String text = ((EditText) findViewById(R.id.publishEditText)).getText().toString();
         if (text == null || text.isEmpty()) {
             new AlertDialog.Builder(this)
-                    .setMessage("You must add a title.")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setMessage(getString(R.string.you_must_add_title))
+                    .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {}
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
                     })
                     .show();
             return;

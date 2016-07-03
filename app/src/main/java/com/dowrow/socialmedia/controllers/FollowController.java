@@ -15,6 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FollowController {
+
     private final Context context;
 
     public FollowController(Context context) {
@@ -72,12 +73,12 @@ public class FollowController {
     private void showFollow(Button button) {
         button.setBackground(context.getResources().getDrawable(R.drawable.solid_button_shape));
         button.setTextColor(context.getResources().getColor(R.color.white));
-        button.setText("Follow");
+        button.setText(R.string.follow);
     }
 
     private void showUnfollow(Button button) {
         button.setBackground(context.getResources().getDrawable(R.drawable.linear_button_shape));
         button.setTextColor(context.getResources().getColor(R.color.colorAccent));
-        button.setText("Unfollow");
+        button.setText(R.string.unfollow);
     }
 }

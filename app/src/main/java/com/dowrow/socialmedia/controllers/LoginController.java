@@ -90,7 +90,7 @@ public class LoginController {
 
     public void onSocialControllerError() {
         Log.d("Social controller error", ":(");
-        Toast toast = Toast.makeText(loginActivity, "Wrong user or password. Try again.", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(loginActivity, R.string.wrong_credentials_notification, Toast.LENGTH_LONG);
         toast.show();
         storedSession = false;
     }
@@ -109,25 +109,25 @@ public class LoginController {
     }
 
     public void initializeSdks(LoginActivity activity) {
-        for(SocialLoginController socialLoginController : socialLoginControllers)
+        for (SocialLoginController socialLoginController : socialLoginControllers)
             socialLoginController.initializeSdk(activity);
     }
 
     public void configureLogins(LoginActivity activity) {
         loginActivity = activity;
-        for(SocialLoginController socialLoginController : socialLoginControllers)
+        for (SocialLoginController socialLoginController : socialLoginControllers)
             socialLoginController.configureLogin(activity, this);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        for(SocialLoginController socialLoginController : socialLoginControllers)
+        for (SocialLoginController socialLoginController : socialLoginControllers)
             socialLoginController.onActivityResult(requestCode, resultCode, data);
     }
 
     public void logOut(Activity currentActivity) {
         clearStoredSession();
         storedSession = false;
-        for(SocialLoginController socialLoginController : socialLoginControllers)
+        for (SocialLoginController socialLoginController : socialLoginControllers)
             socialLoginController.logOut();
         Intent intent = new Intent(currentActivity, LoginActivity.class);
         currentActivity.startActivity(intent);
@@ -136,7 +136,7 @@ public class LoginController {
 
     public void login() {
         final ProgressDialog progress = new ProgressDialog(loginActivity);
-        progress.setMessage("Logging in...");
+        progress.setMessage(loginActivity.getString(R.string.logging_in));
         progress.setCanceledOnTouchOutside(false);
         progress.setCancelable(false);
         progress.show();
@@ -150,7 +150,7 @@ public class LoginController {
                     loginActivity.startActivity(intent);
                     loginActivity.finish();
                     progress.dismiss();
-                    Toast toast = Toast.makeText(loginActivity, "Welcome " + response.body().getUsername(), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(loginActivity, loginActivity.getString(R.string.welcome) + response.body().getUsername(), Toast.LENGTH_SHORT);
                     toast.show();
                 } catch (Exception exception) {
                     onFailure(call, exception);
@@ -161,7 +161,7 @@ public class LoginController {
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 progress.dismiss();
                 Log.d("error", t + " - " + t.getMessage() + " ");
-                Toast toast = Toast.makeText(loginActivity, "The server failed to respond.", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(loginActivity, R.string.server_failed_notification, Toast.LENGTH_LONG);
                 toast.show();
                 logOut(loginActivity);
             }

@@ -38,8 +38,6 @@ public abstract class AbstractFeedController {
 
     private EndlessRecyclerViewScrollListener endlessRecyclerViewScrollListener;
 
-    private boolean publicable = true;
-
     public AbstractFeedController(Fragment fragment) {
         mFragment = fragment;
         api = new SocialMediaAPI();
@@ -55,7 +53,7 @@ public abstract class AbstractFeedController {
             }
 
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState){
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     MainActivity.showFAB();
                 }
@@ -87,18 +85,18 @@ public abstract class AbstractFeedController {
         Call<UserResponse> userHeaderRequest = getUserHeaderRequest();
         if (userHeaderRequest != null && adapter.isEmpty()) {
             userHeaderRequest.enqueue(new Callback<UserResponse>() {
-                    @Override
-                    public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                @Override
+                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
 
-                        adapter.add(response.body());
-                        loadPublications();
-                    }
+                    adapter.add(response.body());
+                    loadPublications();
+                }
 
-                    @Override
-                    public void onFailure(Call<UserResponse> call, Throwable t) {
-                        loadPublications();
-                    }
-                });
+                @Override
+                public void onFailure(Call<UserResponse> call, Throwable t) {
+                    loadPublications();
+                }
+            });
         } else {
             loadPublications();
         }
@@ -147,11 +145,4 @@ public abstract class AbstractFeedController {
 
     public abstract Call<PaginatedResponse<PublicationResponse>> getLoadMoreRequest(String nextCursor);
 
-    public boolean isPublicable() {
-        return publicable;
-    }
-
-    public void setPublicable(boolean publicable) {
-        this.publicable = publicable;
-    }
 }

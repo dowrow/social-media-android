@@ -9,7 +9,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             return;
         }
         getSupportActionBar().hide();
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(view.getContext())
-                        .setTitle("Upload picture")
+                        .setTitle(R.string.upload_picture_title)
                         .setItems(R.array.menu_publish_picture, new DialogInterface
                                 .OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "The selected image can't be published.", Toast.LENGTH_LONG);
+                        R.string.image_can_not_be_published, Toast.LENGTH_LONG);
                 toast.show();
             }
 
@@ -128,11 +127,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), PublishActivity.class);
         intent.putExtra(IMAGE_FILE, imageFile);
         startActivity(intent);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
     }
 }

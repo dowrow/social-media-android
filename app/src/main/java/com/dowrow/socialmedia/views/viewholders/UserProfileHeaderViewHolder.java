@@ -52,7 +52,7 @@ public class UserProfileHeaderViewHolder extends RecyclerView.ViewHolder {
         publicationsCount.setText(user.getPublicationsCount() + "");
         followingCount.setText(user.getFollowingCount() + "");
         followersCount.setText(user.getFollowersCount() + "");
-        final Button followButton = (Button)view.findViewById(R.id.follow_button);
+        final Button followButton = (Button) view.findViewById(R.id.follow_button);
         followController.styleFollowButton(user, followButton);
         followButton.setOnClickListener(new View.OnClickListener() {
             @Override

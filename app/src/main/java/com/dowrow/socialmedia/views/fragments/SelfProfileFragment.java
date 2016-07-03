@@ -31,7 +31,7 @@ public class SelfProfileFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle bundle){
+    public void onViewCreated(View view, Bundle bundle) {
         super.onViewCreated(view, bundle);
         selfProfileController = SelfProfileController.getInstance(this);
         selfProfileController.loadMore();

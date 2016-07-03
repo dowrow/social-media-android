@@ -32,7 +32,7 @@ public class UserSearchFragment extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller = UserSearchController.getInstance(this);
-        SearchView searchButton = (SearchView)view.findViewById(R.id.search_text);
+        SearchView searchButton = (SearchView) view.findViewById(R.id.search_text);
         searchButton.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -58,7 +58,7 @@ public class UserSearchFragment extends Fragment {
         });
     }
 
-    private void search(View view){
+    private void search(View view) {
         controller.setQuery(((SearchView) view.findViewById(R.id.search_text)).getQuery().toString());
         controller.refresh();
     }

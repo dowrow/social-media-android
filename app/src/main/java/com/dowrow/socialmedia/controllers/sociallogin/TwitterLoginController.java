@@ -28,7 +28,7 @@ public class TwitterLoginController implements SocialLoginController {
 
     @Override
     public void initializeSdk(LoginActivity activity) {
-        TwitterAuthConfig authConfig =  new TwitterAuthConfig(
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(
                 activity.getString(R.string.twitter_app_id),
                 activity.getString(R.string.twitter_api_key)
         );
@@ -59,7 +59,7 @@ public class TwitterLoginController implements SocialLoginController {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        twitterLoginButton.onActivityResult(requestCode,resultCode,data);
+        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

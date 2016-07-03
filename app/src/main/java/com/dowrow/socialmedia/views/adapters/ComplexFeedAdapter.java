@@ -43,7 +43,7 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public int getItemViewType(int position) {
         Object item = items.get(position);
         if (item instanceof PublicationResponse) {
-            PublicationResponse publicationResponse = (PublicationResponse)item;
+            PublicationResponse publicationResponse = (PublicationResponse) item;
             UserResponse self = LoginController.getInstance().getSelf();
             if (publicationResponse.getAuthorDetails().getId() == self.getId()) {
                 return SELF_PUBLICATION;
@@ -98,17 +98,17 @@ public class ComplexFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             case PUBLICATION:
                 PublicationViewHolder publicationViewHolder = (PublicationViewHolder) viewHolder;
-                publicationViewHolder.bind((PublicationResponse)items.get(position));
+                publicationViewHolder.bind((PublicationResponse) items.get(position));
                 break;
 
             case SELF_USER:
                 SelfProfileHeaderViewHolder selfProfileHeaderViewHolder = (SelfProfileHeaderViewHolder) viewHolder;
-                selfProfileHeaderViewHolder.bind((UserResponse)items.get(position));
+                selfProfileHeaderViewHolder.bind((UserResponse) items.get(position));
                 break;
 
             case USER:
                 UserProfileHeaderViewHolder userProfileHeaderViewHolder = (UserProfileHeaderViewHolder) viewHolder;
-                userProfileHeaderViewHolder.bind((UserResponse)items.get(position));
+                userProfileHeaderViewHolder.bind((UserResponse) items.get(position));
                 break;
         }
     }
